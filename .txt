@@ -1,0 +1,35 @@
+Product:
+-id
+-Kod 
+-name       #3-tilda uz-ru-en
+-description   #3-tilda uz-ru-en
+-image 
+-narxi 
+-category_id
+-diametri
+-ichki diametri
+-ichki uzunligi
+-tashqi uzunligi
+-upakofkadagi soni
+-soni
+-razmer
+
+
+
+shart emaslari :
+-diametri
+-ichki diametri
+-ichki uzunligi
+-tashqi uzunligi
+-upakofkadagi soni
+-razmer
+-soni
+
+
+Kirtilishi shart bo'lganlari :
+-image
+-Kod ##
+-name ##
+-narxi ##
+-description ##
+category_id ##

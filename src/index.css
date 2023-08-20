@@ -1,0 +1,34 @@
+.placeholder-card-image {
+  height: 300px;
+  object-fit: contain;
+}
+
+.product-description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+#footer-shop {
+  background: #0dcaf0;
+  margin-bottom: 0;
+}
+footer {
+  padding-top: 2rem !important;
+}
+footer .social-buttons {
+  margin-top: 1.5rem !important;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 400px) {
+  footer {
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+  }
+
+  footer .social-buttons {
+    margin-left: -0.6rem !important;
+  }
+}
