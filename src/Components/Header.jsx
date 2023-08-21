@@ -52,6 +52,16 @@ const Header = () => {
                   Категория
                 </Link>
               </li>
+              <li className="nav-item ">
+                <Link className="text-light nav-link fs-4" to="/news">
+                  Новости
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link className="text-light nav-link fs-4" to="/dealers">
+                  Дилеры
+                </Link>
+              </li>
               <li className="nav-item">
                 <button
                   onClick={handleLogout}

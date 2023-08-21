@@ -13,6 +13,15 @@ import CategoriesList from "./Pages/Categories.jsx";
 import CategoryDetailsList from "./Pages/CategoryDetails.jsx";
 import MoreInfo from "./Pages/ProductDetails.jsx";
 import EditCategories from "./Components/editCategories.jsx";
+import News from "./Pages/News.jsx";
+// import createNews from "./Components/createNews.jsx";
+import CreateNews from "./Components/createNews.jsx";
+import Newsdetails from "./Components/NewsDetails.jsx";
+import EditNews from "./Components/EditNews.jsx";
+import Dealers from "./Pages/Dealers.jsx";
+import CreateDealers from "./Components/CreateDealers.jsx";
+import DealerDetails from "./Components/dealerDetails.jsx";
+import EditDealers from "./Components/EditDealers.jsx";
 
 function App() {
   return (
@@ -29,6 +38,16 @@ function App() {
         <Route path="/categories/:id" element={<CategoryDetailsList />} />
         <Route path="/createCategory" element={<CategoriesForm />} />
         <Route path="/editCategories/:id" element={<EditCategories />} />
+
+        <Route path="/news" element={<News />} />
+        <Route path="/createNews" element={<CreateNews />} />
+        <Route path="/news/:id" element={<Newsdetails />} />
+        <Route path="/editNews/:id" element={<EditNews />} />
+
+        <Route path="/dealers" element={<Dealers />} />
+        <Route path="/createDealers" element={<CreateDealers />} />
+        <Route path="/dealers/:id" element={<DealerDetails />} />
+        <Route path="/editDealers/:id" element={<EditDealers />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
