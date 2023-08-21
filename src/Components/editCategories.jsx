@@ -72,14 +72,10 @@ const EditCategories = () => {
     } catch (error) {
       console.log("Error updating category:", error);
 
-      if (error) {
-        console.log("Error response data:", error);
-        console.log("Error response status:", error);
-      }
-
       toast("Не удалось обновить категорию", {
         type: "error",
       });
+      toast("Изображение с таким названием уже загружено", { type: "error" });
     } finally {
       setIsUploading(false);
     }
@@ -95,6 +91,7 @@ const EditCategories = () => {
       } catch (error) {
         console.error("Error fetching category details:", error);
         toast("Произошла ошибка, попробуйте еще раз", { type: "warning" });
+        navigate("/categories");
       }
     }
 
@@ -108,16 +105,16 @@ const EditCategories = () => {
       <Header />
       <div className="container mt-4 mb-5">
         <div className="d-flex justify-content-between mb-5">
-          <h2>Edit {id} Category</h2>
+          <h2>Изменить категорию {id} </h2>
           <Link to={`/products`} className="btn btn-primary col-2 me-1">
-            <AiFillBackward /> Hamma Categorylar
+            <AiFillBackward /> Все категории
           </Link>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="uz_category_name" className="form-label">
-              Nomi (Uzbek):
+              Имя (узбекский) :
             </label>
             <input
               type="text"
@@ -130,7 +127,7 @@ const EditCategories = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="ru_category_name" className="form-label">
-              Nomi (Russian):
+              Имя (Русский) :
             </label>
             <input
               type="text"
@@ -143,7 +140,7 @@ const EditCategories = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="en_category_name" className="form-label">
-              Nomi (English):
+              Имя (Английский) :
             </label>
             <input
               type="text"
@@ -157,7 +154,7 @@ const EditCategories = () => {
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-              Rasm:
+              Изображение :
             </label>
             <input
               type="file"
@@ -169,13 +166,13 @@ const EditCategories = () => {
             />
           </div>
           <div>
-            {isUploading && <p>Yuklanmoqda...</p>}
+            {isUploading && <p>Загрузка, пожалуйста подождите ....</p>}
             <button
               type="submit" // Changed to type="submit"
               className="btn btn-primary mb-5 col-3 me-1"
               disabled={isUploading}
             >
-              <AiOutlineSave /> Saqlash
+              <AiOutlineSave /> Добавлять
             </button>
           </div>
         </form>

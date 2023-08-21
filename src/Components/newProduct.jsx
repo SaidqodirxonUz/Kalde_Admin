@@ -4,10 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 
 const ProductForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     uz_product_name: "",
     ru_product_name: "",
@@ -15,7 +16,7 @@ const ProductForm = () => {
     uz_desc: "",
     ru_desc: "",
     en_desc: "",
-    category_id: 1,
+    // category_id: null,
     price: "",
     barcode: "",
     diametr: "",
@@ -24,7 +25,6 @@ const ProductForm = () => {
     tashqi_uzunlik: "",
     razmer: "",
     soni: "",
-    image: null,
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -67,10 +67,6 @@ const ProductForm = () => {
 
   const handleImageChange = (event) => {
     setImageFile(event.target.files[0]);
-    setFormData((prevData) => ({
-      ...prevData,
-      image: event.target.files[0], // Set the selected image file
-    }));
   };
 
   const handleSubmit = async (event) => {
@@ -83,8 +79,53 @@ const ProductForm = () => {
 
     const formDataWithImage = new FormData();
 
-    formDataWithImage.append("image", imageFile);
-    formDataWithImage.append("category_id", selectedCategoryId);
+    if (
+      formData.diametr == "" ||
+      formData.ichki_diametr == "" ||
+      formData.ichki_uzunlik == "" ||
+      formData.tashqi_uzunlik == "" ||
+      formData.razmer == "" ||
+      formData.soni == "" ||
+      (formData.diametr == "" &&
+        formData.ichki_diametr == "" &&
+        formData.ichki_uzunlik == "" &&
+        formData.tashqi_uzunlik == "" &&
+        formData.razmer == "" &&
+        formData.soni == "")
+    ) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+
+      formDataWithImage.append("image", imageFile);
+      formDataWithImage.append("category_id", selectedCategoryId);
+    } else {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+
+      formDataWithImage.append("diametr", formData.diametr);
+      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
+      formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
+      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
+      formDataWithImage.append("razmer", formData.razmer);
+      formDataWithImage.append("soni", formData.soni);
+
+      formDataWithImage.append("image", imageFile);
+      formDataWithImage.append("category_id", selectedCategoryId);
+    }
+
+    console.log(formData);
 
     try {
       setIsUploading(true);
@@ -98,15 +139,17 @@ const ProductForm = () => {
 
       console.log("Product added:", response.data.data);
       toast(response.data.message, { type: "success" });
+      navigate("/products");
     } catch (error) {
       console.log("Error adding product:", error.message);
 
-      if (error.response) {
-        console.log("Server Response Data:", error.response.data);
-        console.log("Status Code:", error.response.status);
-        toast(error.response.data.message || "Ошибка добавления продукта", {
+      if (error) {
+        // console.log("Server Response Data:", error.response.data);
+        // console.log("Status Code:", error.response.status);
+        toast("Ошибка добавления продукта & Проверьте штрих-код", {
           type: "error",
         });
+        toast("Изображение с таким названием уже загружено", { type: "error" });
       }
     } finally {
       setIsUploading(false);
@@ -260,7 +303,7 @@ const ProductForm = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="diametr" className="form-label">
-              Диаметр <span className="text-danger">Необязательно</span> :
+              Диаметр <span className="text-danger">Oбязательно</span> :
             </label>
             <input
               type="number"
@@ -349,7 +392,7 @@ const ProductForm = () => {
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-              Изображение<span className="text-danger"> Необязательно</span> :
+              Изображение<span className="text-danger"> Oбязательно</span> :
             </label>
             <input
               type="file"
