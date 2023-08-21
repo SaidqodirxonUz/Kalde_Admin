@@ -10,38 +10,45 @@ import { AiFillBackward, AiOutlineSave } from "react-icons/ai";
 const EditAdmin = () => {
   let { id } = useParams();
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    full_name: "",
-    phone_number: "",
-    password: "",
-  });
+  const [full_name, setFull_Name] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  //   const [formData, setFormData] = useState({
+  //     full_name: "",
+  //     phone_number: "",
+  //     password: "",
+  //   });
 
   const [isUploading, setIsUploading] = useState(false);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  //   const handleInputChange = (event) => {
+  //     const { name, value } = event.target;
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       [name]: value,
+  //     }));
+  //   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formDataWithImage = new FormData();
-    formDataWithImage.append("full_name", formData.full_name);
-    formDataWithImage.append("phone_number", formData.phone_number);
-    formDataWithImage.append("password", formData.password);
-
+    // const formDataWithImage = new FormData();
+    // formDataWithImage.append("full_name", formData.full_name);
+    // formDataWithImage.append("phone_number", formData.phone_number);
+    // formDataWithImage.append("password", formData.password);
+    const Formdata = {
+      full_name: full_name,
+      phone_number: phone,
+      password: password,
+    };
+    console.log(Formdata);
     try {
       setIsUploading(true);
 
-      const response = await axios.patch(`/admin/${id}`, formDataWithImage, {
+      const response = await axios.patch(`/admin/${id}`, Formdata, {
         headers: {
           Authorization: localStorage.getItem("token"),
-          "Content-Type": "multipart/form-data", // Set the Content-Type header
+          "Content-Type": "Application/json", // Set the Content-Type header
         },
       });
 
@@ -51,12 +58,12 @@ const EditAdmin = () => {
       //   navigate("/categories");
 
       // Clear form inputs after successful submission
-      setFormData({
-        full_name: "",
-        phone_number: "",
-        password: "",
-      });
-      setImageFile(null);
+      //   setFormData({
+      //     full_name: "",
+      //     phone_number: "",
+      //     password: "",
+      //   });
+      //   setImageFile(null);
       navigate("/");
     } catch (error) {
       console.log("Error updating admin:", error);
@@ -86,8 +93,10 @@ const EditAdmin = () => {
               type="text"
               id="full_name"
               name="full_name"
-              value={formData.full_name}
-              onChange={handleInputChange}
+              value={full_name}
+              onChange={(e) => {
+                setFull_Name(e.target.value);
+              }}
               className="form-control"
             />
           </div>
@@ -99,8 +108,10 @@ const EditAdmin = () => {
               type="text"
               id="phone_number"
               name="phone_number"
-              value={formData.phone_number}
-              onChange={handleInputChange}
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
               className="form-control"
             />
           </div>
@@ -112,8 +123,10 @@ const EditAdmin = () => {
               type="text"
               id="password"
               name="password"
-              value={formData.password}
-              onChange={handleInputChange}
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               className="form-control"
             />
           </div>
