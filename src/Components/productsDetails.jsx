@@ -8,7 +8,7 @@ const More = () => {
   const { id } = useParams();
   const [product, setProducts] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:6000/products/${id}`)
+    fetch(`http://localhost:5000/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProducts(data.data));
   }, []);

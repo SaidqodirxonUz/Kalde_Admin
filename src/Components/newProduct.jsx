@@ -67,6 +67,10 @@ const ProductForm = () => {
 
   const handleImageChange = (event) => {
     setImageFile(event.target.files[0]);
+    setFormData((prevData) => ({
+      ...prevData,
+      image: event.target.files[0], // Set the selected image file
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -77,21 +81,17 @@ const ProductForm = () => {
       return;
     }
 
-    const categoryIdAsNumber = Number(selectedCategoryId); // Convert to number
-    console.log("Category Id As Number  bu ", categoryIdAsNumber);
-    console.log("Category Id As Number type bu  ", typeof categoryIdAsNumber);
-
     const formDataWithImage = new FormData();
 
     formDataWithImage.append("image", imageFile);
-    formDataWithImage.append("category_id", categoryIdAsNumber); // Use the converted value
+    formDataWithImage.append("category_id", selectedCategoryId);
 
     try {
       setIsUploading(true);
 
       const response = await axios.post("/products", formDataWithImage, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data", // Use the correct content type
           Authorization: localStorage.getItem("token"),
         },
       });
@@ -99,23 +99,14 @@ const ProductForm = () => {
       console.log("Product added:", response.data.data);
       toast(response.data.message, { type: "success" });
     } catch (error) {
-      console.log(formData);
-      console.log(formData.price);
-      console.log("price type bu ", typeof formData.price);
-
       console.log("Error adding product:", error.message);
-      toast(error.message, { type: "error" });
 
       if (error.response) {
         console.log("Server Response Data:", error.response.data);
         console.log("Status Code:", error.response.status);
-        toast("Ошибка добавления продукта", { type: "error" });
-      }
-      if (
-        error.message ==
-        'Произошла ошибка error: insert into "images" ("filename", "image_url") values ($1, $2) returning "id", "image_url", "filename" - duplicate key value violates unique constraint "images_filename_unique"'
-      ) {
-        toast("Изображение с таким названием уже загружено", { type: "error" });
+        toast(error.response.data.message || "Ошибка добавления продукта", {
+          type: "error",
+        });
       }
     } finally {
       setIsUploading(false);
@@ -133,7 +124,7 @@ const ProductForm = () => {
           </Link>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="mb-3">
             <label htmlFor="uz_product_name" className="form-label">
               Имя (узбекский) <span className="text-danger">Обязательно</span> :
@@ -226,14 +217,16 @@ const ProductForm = () => {
             <select
               id="category_id"
               name="category_id"
-              value={selectedCategoryId} // No need for Number() conversion here
+              value={selectedCategoryId}
               onChange={handleCategoryChange}
               className="form-control"
               required
             >
               <option value="">Выберите категорию</option>
               {categories.map((category) => (
-                <option value={category.id}>{category.ru_category_name}</option>
+                <option key={category.id} value={category.id}>
+                  {category.ru_category_name}
+                </option>
               ))}
             </select>
           </div>

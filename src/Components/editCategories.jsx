@@ -4,17 +4,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "./Footer";
-import { Link, useParams } from "react-router-dom";
-import { AiFillBackward, AiOutlinePlus, AiOutlineSave } from "react-icons/ai";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { AiFillBackward, AiOutlineSave } from "react-icons/ai";
 
 const EditCategories = () => {
   let { id } = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     uz_category_name: "",
     ru_category_name: "",
     en_category_name: "",
-    image: null,
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -27,34 +27,18 @@ const EditCategories = () => {
       [name]: value,
     }));
   };
+
   const handleImageChange = (event) => {
     setImageFile(event.target.files[0]);
   };
-
-  useEffect(() => {
-    async function fetchCategoriesDetails() {
-      try {
-        const response = await axios.get(`/categories/${id}`);
-        const categoriesData = response.data.data;
-        setFormData(categoriesData);
-        toast.success("Успешно");
-      } catch (error) {
-        console.error("Error fetching category details:", error);
-      }
-    }
-
-    if (id) {
-      fetchCategoriesDetails();
-    }
-  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formDataWithImage = new FormData();
-    for (const key in formData) {
-      formDataWithImage.append(key, formData[key]);
-    }
+    formDataWithImage.append("uz_category_name", formData.uz_category_name);
+    formDataWithImage.append("ru_category_name", formData.ru_category_name);
+    formDataWithImage.append("en_category_name", formData.en_category_name);
     if (imageFile) {
       formDataWithImage.append("image", imageFile);
     }
@@ -67,29 +51,57 @@ const EditCategories = () => {
         formDataWithImage,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
             Authorization: localStorage.getItem("token"),
+            "Content-Type": "multipart/form-data", // Set the Content-Type header
           },
         }
       );
 
-      console.log(response.data.message);
-      toast.success(response.data.message);
+      console.log(response.data);
+      toast.success("Категория успешно обновлена");
+
+      navigate("/categories");
+
+      // Clear form inputs after successful submission
+      setFormData({
+        uz_category_name: "",
+        ru_category_name: "",
+        en_category_name: "",
+      });
+      setImageFile(null);
     } catch (error) {
       console.log("Error updating category:", error);
 
-      if (error.response) {
-        console.log("Error response data:", error.response.data);
-        console.log("Error response status:", error.response.status);
+      if (error) {
+        console.log("Error response data:", error);
+        console.log("Error response status:", error);
       }
 
-      toast("An error occurred while updating the category.", {
+      toast("Не удалось обновить категорию", {
         type: "error",
       });
     } finally {
       setIsUploading(false);
     }
   };
+
+  useEffect(() => {
+    async function fetchCategoriesDetails() {
+      try {
+        const response = await axios.get(`/categories/${id}`);
+        const categoriesData = response.data.data;
+        setFormData(categoriesData);
+        // toast.success("Успешно");
+      } catch (error) {
+        console.error("Error fetching category details:", error);
+        toast("Произошла ошибка, попробуйте еще раз", { type: "warning" });
+      }
+    }
+
+    if (id) {
+      fetchCategoriesDetails();
+    }
+  }, [id]);
 
   return (
     <>
