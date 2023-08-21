@@ -20,8 +20,8 @@ import Newsdetails from "./Components/NewsDetails.jsx";
 import EditNews from "./Components/EditNews.jsx";
 import Dealers from "./Pages/Dealers.jsx";
 import CreateDealers from "./Components/CreateDealers.jsx";
-import DealerDetails from "./Components/dealerDetails.jsx";
 import EditDealers from "./Components/EditDealers.jsx";
+import DealerDetails from "./Components/DealerDetails.jsx";
 
 function App() {
   return (
