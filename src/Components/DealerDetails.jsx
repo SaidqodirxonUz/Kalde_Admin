@@ -4,7 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import axios from "axios";
 
-const Newsdetails = () => {
+const DealerDetails = () => {
   const { id } = useParams();
   const [dealer, setDealer] = useState({});
 
@@ -73,4 +73,4 @@ const Newsdetails = () => {
   );
 };
 
-export default Newsdetails;
+export default DealerDetails;
