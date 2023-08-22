@@ -13,7 +13,7 @@ const ProductCards = () => {
 
   const handleDelete = async (id) => {
     try {
-      if (window.confirm("Haqiqatan ham bu mahsulotni o'chirmoqchimisiz?")) {
+      if (window.confirm("Вы уверены, что хотите удалить это?")) {
         await deleteProduct(id);
       }
     } catch (error) {

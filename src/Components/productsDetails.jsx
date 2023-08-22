@@ -9,9 +9,9 @@ const More = () => {
   const { id } = useParams();
   const [product, setProducts] = useState([]);
   useEffect(() => {
-    axios.get(`/products/${id}`).then((res) => setProducts([res.data]));
-    // .then((data) => setProducts(data.data));
-    // fetch(`http://localhost:5000`)
+    fetch(`https://back.kalde.uz/products/${id}`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data.data));
   }, []);
   console.log(product);
   return (
