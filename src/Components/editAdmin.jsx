@@ -38,7 +38,7 @@ const EditAdmin = () => {
     try {
       setIsUploading(true);
 
-      const response = await axios.patch(`/admin/${id}`, formDataWithImage, {
+      const response = await axios.patch(`/admin/1`, formDataWithImage, {
         headers: {
           Authorization: localStorage.getItem("token"),
           "Content-Type": "multipart/form-data", // Set the Content-Type header
@@ -57,11 +57,8 @@ const EditAdmin = () => {
         password: "",
       });
       setImageFile(null);
-
-      navigate("/");
-
     } catch (error) {
-      console.log("Error updating admin:", error);
+      console.log("Error updating admin:", error.message);
 
       toast("Не удалось обновить Admin", {
         type: "error",

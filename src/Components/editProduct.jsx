@@ -99,9 +99,7 @@ const editProduct = () => {
     console.log("FORMDATA", formData);
 
     if (imageFile) {
-      for (const file of imageFile) {
-        formDataWithImage.append("image", file);
-      }
+      formDataWithImage.append("image", imageFile);
     }
 
     try {
