@@ -21,6 +21,8 @@ import EditNews from "./Components/EditNews.jsx";
 import Dealers from "./Pages/Dealers.jsx";
 import CreateDealers from "./Components/CreateDealers.jsx";
 import EditDealers from "./Components/EditDealers.jsx";
+import EditAdmin from "./Components/editAdmin.jsx";
+
 import DealerDetails from "./Components/DealerDetails.jsx";
 
 function App() {
@@ -49,6 +51,7 @@ function App() {
         <Route path="/dealers/:id" element={<DealerDetails />} />
         <Route path="/editDealers/:id" element={<EditDealers />} />
 
+        <Route path="/editAdmin" element={<EditAdmin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/public-offer" element={<Oferta />} />

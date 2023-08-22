@@ -57,6 +57,9 @@ const EditAdmin = () => {
         password: "",
       });
       setImageFile(null);
+
+      navigate("/");
+
     } catch (error) {
       console.log("Error updating admin:", error);
 
