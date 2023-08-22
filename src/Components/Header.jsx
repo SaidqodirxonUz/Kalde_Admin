@@ -1,14 +1,13 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
 
   function handleLogout() {
     localStorage.removeItem("token");
-    toast("Logged Out", { type: "info" });
+    toast("выход", { type: "info" });
     navigate("/login");
   }
 
@@ -62,6 +61,13 @@ const Header = () => {
                   Дилеры
                 </Link>
               </li>
+
+              <li className="nav-item ">
+                <Link className="btn btn-outline-warning fs-4" to="/editAdmin">
+                  <i class="fa-solid fa-user text-light"></i>
+                </Link>
+              </li>
+
               <li className="nav-item">
                 <button
                   onClick={handleLogout}

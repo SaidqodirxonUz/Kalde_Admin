@@ -4,10 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 
 const CreateNews = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title_uz: "",
     title_ru: "",
@@ -58,6 +59,7 @@ const CreateNews = () => {
 
       console.log("news added:", response.data.data);
       toast("добавлена", { type: "success" });
+      navigate("/news");
     } catch (error) {
       console.log("Error adding category:", error.message);
       //   toast(error.message, { type: "error" });
@@ -183,7 +185,7 @@ const CreateNews = () => {
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-              Изображение<span className="text-danger"> Необязательно</span> :
+              Изображение<span className="text-danger"> Oбязательно</span> :
             </label>
             <input
               type="file"

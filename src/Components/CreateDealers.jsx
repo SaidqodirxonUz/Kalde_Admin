@@ -4,10 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 
 const CreateDealers = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title_uz: "",
     title_ru: "",
@@ -65,6 +66,7 @@ const CreateDealers = () => {
 
       console.log(" added:", response.data);
       toast("добавлена", { type: "success" });
+      navigate("/dealers");
     } catch (error) {
       console.log("Error adding category:", error.message);
       //   toast(error.message, { type: "error" });

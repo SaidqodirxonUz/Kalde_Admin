@@ -303,7 +303,7 @@ const ProductForm = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="diametr" className="form-label">
-              Диаметр <span className="text-danger">Oбязательно</span> :
+              Диаметр <span className="text-danger">Необязательно</span> :
             </label>
             <input
               type="number"
