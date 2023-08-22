@@ -4,10 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 
 const CategoriesForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     uz_category_name: "",
     ru_category_name: "",
@@ -32,6 +33,7 @@ const CategoriesForm = () => {
   const handleImageChange = (event) => {
     setImageFile(event.target.files[0]);
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -59,21 +61,16 @@ const CategoriesForm = () => {
 
       console.log("category added:", response.data.data);
       toast("Категория добавлена", { type: "success" });
+      navigate("/categories");
     } catch (error) {
       console.log("Error adding category:", error.message);
       //   toast(error.message, { type: "error" });
 
-      if (error.message) {
-        console.log("Server Response Data:", error.response.data);
-        console.log("Status Code:", error.response.status);
-        toast("Ошибка добавления Категория", { type: "error" });
-      }
-      if (
-        error.message ==
-        'Произошла ошибка error: insert into "images" ("filename", "image_url") values ($1, $2) returning "id", "image_url", "filename" - duplicate key value violates unique constraint "images_filename_unique"'
-      ) {
-        toast("Изображение с таким названием уже загружено", { type: "error" });
-      }
+      toast("Изображение с таким названием уже загружено", { type: "error" });
+      toast("Ошибка добавления Категория", { type: "error" });
+
+      console.log("Server Response Data:", error.response.data);
+      console.log("Status Code:", error.response.status);
     } finally {
       setIsUploading(false);
     }
@@ -139,7 +136,7 @@ const CategoriesForm = () => {
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-              Изображение<span className="text-danger"> Необязательно</span> :
+              Изображение<span className="text-danger"> Oбязательно</span> :
             </label>
             <input
               type="file"

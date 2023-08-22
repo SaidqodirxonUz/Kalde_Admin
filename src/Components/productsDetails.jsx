@@ -8,7 +8,7 @@ const More = () => {
   const { id } = useParams();
   const [product, setProducts] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:6000/products/${id}`)
+    fetch(`http://localhost:5000/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProducts(data.data));
   }, []);
@@ -30,16 +30,16 @@ const More = () => {
 
                   <div className="card-body">
                     <h3 className="card-title text-truncate">
-                      nomi : {product.ru_product_name}
+                      Имя : {product.ru_product_name}
                     </h3>
                     <div className="card-text">
                       <h5 className="product-description my-3">
-                        barcode : {product.barcode}
+                        Шитрикс код : {product.barcode}
                       </h5>
                     </div>
                     <div className="d-flex g-3 row">
                       <h6 className="text-danger fs-2">
-                        narxi : {product.price}
+                        Цена : {product.price}
                       </h6>
                       <div className="col-6 d-flex justify-content-between">
                         <h6 className="fs-2">{product.category}</h6>
@@ -55,7 +55,7 @@ const More = () => {
                   className="btn btn-primary w-25 d-flex justify-content-center m-auto fs-6 mt-5"
                 >
                   <i className="fa-solid fa-arrow-left d-flex justify-content-center m-1"></i>{" "}
-                  Back
+                  назад
                 </Link>
               </div>
             ))}

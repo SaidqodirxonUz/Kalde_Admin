@@ -22,6 +22,7 @@ import Dealers from "./Pages/Dealers.jsx";
 import CreateDealers from "./Components/CreateDealers.jsx";
 import EditDealers from "./Components/EditDealers.jsx";
 import EditAdmin from "./Components/editAdmin.jsx";
+
 import DealerDetails from "./Components/DealerDetails.jsx";
 
 function App() {

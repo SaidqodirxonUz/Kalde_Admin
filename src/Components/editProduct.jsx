@@ -4,11 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "./Footer";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiFillBackward, AiOutlinePlus, AiOutlineSave } from "react-icons/ai";
 
 const editProduct = () => {
   let { id } = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     uz_product_name: "",
@@ -40,12 +41,12 @@ const editProduct = () => {
       try {
         const response = await axios.get("/categories");
         setCategories(response.data.data);
-        toast.success("успешный");
-
-        console.log(response.data.data);
       } catch (error) {
-        console.error(error.message);
-        toast.error(error.message);
+        // console.error(error.message);
+        // toast.error("Failed to fetch categories");
+        toast("Не удалось обновить категорию", {
+          type: "error",
+        });
       }
     }
 
@@ -56,17 +57,16 @@ const editProduct = () => {
     async function fetchProductDetails() {
       try {
         const response = await axios.get(`/products/${id}`);
-        console.log(response);
         const productData = response.data.data;
         setFormData(productData);
         setSelectedCategoryId(productData.category_id);
-        toast.success("успешный");
       } catch (error) {
-        console.error("Error fetching product details:", error);
+        // console.error("Error fetching product details:", error);
+        toast("Произошла ошибка, попробуйте еще раз", { type: "warning" });
+        navigate("/products");
       }
     }
 
-    // fetchCategories();
     if (id) {
       fetchProductDetails();
     }
@@ -83,6 +83,7 @@ const editProduct = () => {
       [name]: value,
     }));
   };
+
   const handleImageChange = (event) => {
     setImageFile(event.target.files[0]);
   };
@@ -91,12 +92,142 @@ const editProduct = () => {
     event.preventDefault();
 
     const formDataWithImage = new FormData();
-    for (const key in formData) {
-      formDataWithImage.append(key, formData[key]);
+    if (formData.diametr !== null && formData.soni !== null) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("diametr", formData.diametr);
+      formDataWithImage.append("soni", formData.soni);
+    } else if (
+      formData.diametr !== null &&
+      formData.ichki_diametr !== null &&
+      formData.ichki_uzunlik !== null &&
+      formData.tashqi_uzunlik !== null &&
+      formData.soni !== null
+    ) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("diametr", formData.diametr);
+      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
+      formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
+      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
+      formDataWithImage.append("soni", formData.soni);
+    } else if (formData.razmer !== null) {
+      formDataWithImage.append("razmer", formData.razmer);
+    } else if (
+      formData.razmer !== null &&
+      formData.ichki_diametr !== null &&
+      formData.diametr !== null &&
+      formData.tashqi_uzunlik !== null &&
+      formData.soni !== null
+    ) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
+      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
+      formDataWithImage.append("diametr", formData.diametr);
+      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
+      formDataWithImage.append("soni", formData.soni);
+    } else if (
+      formData.razmer !== null &&
+      formData.ichki_diametr !== null &&
+      formData.tashqi_uzunlik !== null &&
+      formData.soni !== null
+    ) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
+      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
+      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
+      formDataWithImage.append("soni", formData.soni);
+    } else if (formData.razmer !== null && formData.soni !== null) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
+      formDataWithImage.append("soni", formData.soni);
+    } else if (
+      formData.razmer !== null &&
+      formData.diametr !== null &&
+      formData.soni !== null
+    ) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
+      formDataWithImage.append("diametr", formData.diametr);
+      formDataWithImage.append("soni", formData.soni);
+    } else if (formData.razmer !== null) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
+    } else {
+      toast("Вы добавляете не тот товар, невозможно добавить этот тип товара");
     }
-    formDataWithImage.append("image", imageFile);
 
-    console.log("Request Payload:", Object.fromEntries(formDataWithImage));
+    // formDataWithImage.append("category_id", selectedCategoryId);
+
+    // formDataWithImage.append("diametr", formData.diametr);
+    // formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
+    // formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
+    // formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
+    // formDataWithImage.append("razmer", formData.razmer);
+    // formDataWithImage.append("soni", formData.soni);
+
+    formDataWithImage.append("category_id", selectedCategoryId);
+
+    console.log("FORMDATA WITH IMAGE", formDataWithImage);
+    console.log("FORMDATA", formData);
+
+    if (imageFile) {
+      formDataWithImage.append("image", imageFile);
+    }
 
     try {
       setIsUploading(true);
@@ -108,11 +239,11 @@ const editProduct = () => {
         },
       });
 
-      console.log(response.data.message);
-      toast.success(response.data.message);
+      toast.success("Товар успешно обновлена");
+      navigate("/products");
     } catch (error) {
-      console.log("Error update product:", error);
-      toast(error.message, { type: "error" });
+      console.error("Error updating product:", error.message);
+      toast.error("Failed to update product");
     } finally {
       setIsUploading(false);
     }
@@ -123,16 +254,16 @@ const editProduct = () => {
       <Header />
       <div className="container mt-4 mb-5">
         <div className="d-flex justify-content-between mb-5">
-          <h2>Edit {id} Product</h2>
+          <h2>Изменить Продукт {id} </h2>
           <Link to={`/products`} className="btn btn-primary col-2 me-1">
-            <AiFillBackward /> Hamma Productlar
+            <AiFillBackward /> Все продукты
           </Link>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="uz_product_name" className="form-label">
-              Nomi (Uzbek):
+              Имя (узбекский) :
             </label>
             <input
               type="text"
@@ -145,7 +276,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="ru_product_name" className="form-label">
-              Nomi (Russian):
+              Имя (Русский) :
             </label>
             <input
               type="text"
@@ -158,7 +289,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="en_product_name" className="form-label">
-              Nomi (English):
+              Имя (Английский) :
             </label>
             <input
               type="text"
@@ -171,7 +302,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="uz_desc" className="form-label">
-              Ma'lumot (Uzbek):
+              Информация (узбекский) :
             </label>
             <textarea
               id="uz_desc"
@@ -183,7 +314,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="ru_desc" className="form-label">
-              Ma'lumot (Russian):
+              Информация (русский) :
             </label>
             <textarea
               id="ru_desc"
@@ -195,7 +326,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="en_desc" className="form-label">
-              Ma'lumot (English):
+              Информация (Английский) :
             </label>
             <textarea
               id="en_desc"
@@ -207,7 +338,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="category_id" className="form-label">
-              Category:
+              Категории :
             </label>
             <select
               typeof="number"
@@ -217,7 +348,7 @@ const editProduct = () => {
               onChange={handleCategoryChange}
               className="form-control"
             >
-              <option value="">Select a category</option>
+              <option value="">Выберите категорию</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.ru_category_name}
@@ -227,7 +358,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="price" className="form-label">
-              Narxi:
+              Цена :
             </label>
             <input
               type="number"
@@ -240,7 +371,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="barcode" className="form-label">
-              Barcode:
+              Штрих-код :
             </label>
             <input
               type="number"
@@ -253,7 +384,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="diametr" className="form-label">
-              Diametr:
+              Диаметр :
             </label>
             <input
               type="number"
@@ -267,7 +398,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="ichki_diametr" className="form-label">
-              Ichki Diametr:
+              Внутренний диаметр :
             </label>
             <input
               type="number"
@@ -281,7 +412,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="ichki_uzunlik" className="form-label">
-              Ichki Uzunlik:
+              Внутренняя длина :
             </label>
             <input
               type="number"
@@ -295,7 +426,7 @@ const editProduct = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="tashqi_uzunlik" className="form-label">
-              Tashqi Uzunlik:
+              Внешняя длина :
             </label>
             <input
               type="number"
@@ -310,7 +441,7 @@ const editProduct = () => {
 
           <div className="mb-3">
             <label htmlFor="razmer" className="form-label">
-              Razmer :
+              Размер :
             </label>
             <input
               type="number"
@@ -325,7 +456,7 @@ const editProduct = () => {
 
           <div className="mb-3">
             <label htmlFor="soni" className="form-label">
-              soni :
+              Номер :
             </label>
             <input
               type="number"
@@ -340,7 +471,7 @@ const editProduct = () => {
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-              Rasm:
+              Изображение :
             </label>
             <input
               type="file"
@@ -351,13 +482,13 @@ const editProduct = () => {
             />
           </div>
           <div>
-            {isUploading && <p>Yuklanmoqda...</p>}
+            {isUploading && <p>Загрузка, пожалуйста подождите ....</p>}
             <button
               type="submit" // Changed to type="submit"
               className="btn btn-primary mb-5 col-3 me-1"
               disabled={isUploading}
             >
-              <AiOutlineSave /> Saqlash
+              <AiOutlineSave /> Сохранять
             </button>
           </div>
         </form>

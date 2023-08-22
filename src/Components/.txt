@@ -1,0 +1,46 @@
+Truba 
+- diametr
+- upakofkada soni
+
+fiting moslagich 
+- diametr
+- ichki diametr
+- ichki uzunlik
+- tashqi uzunlik
+- upakofkada soni
+
+aylanib o'tkich
+- razmer 
+
+uchtaklik ulagich 
+- razmer
+- ichki diametr
+- tashqi diametri
+- diametr
+- upakofkada soni
+
+temirga ulagich   va kraniklarda shunaqa
+- razmer
+- ichki diametri
+- ichki uzunligi
+- tashq uzunligi
+- upakofkada soni
+
+Kraniklar truba
+- razmer
+- ichki diametr
+- uzunligi
+- upakofkada soni
+
+Temirni turbani plasmasaga ulagich
+- razmer
+- upakofkada soni
+
+Turiba qotirgichlar
+- razmer
+- diametri
+- upakofkada soni
+
+
+PPR turbalari
+- diametri
