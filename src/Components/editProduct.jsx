@@ -225,9 +225,9 @@ const editProduct = () => {
     console.log("FORMDATA WITH IMAGE", formDataWithImage);
     console.log("FORMDATA", formData);
 
-    if (imageFile) {
-      formDataWithImage.append("image", imageFile);
-    }
+    // if (image) {
+    formDataWithImage.append("image", imageFile);
+    // }
 
     try {
       setIsUploading(true);
