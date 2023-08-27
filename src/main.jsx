@@ -13,7 +13,7 @@ import "/node_modules/bootstrap/dist/js/bootstrap";
 
 // axios.defaults.baseURL = "https://kalde.victoriaslove.uz";
 
-axios.defaults.baseURL = "https://api.kalde.uz";
+axios.defaults.baseURL = "https://back.kalde.uz";
 
 axios.defaults.headers.access_token = localStorage.getItem("token");
 

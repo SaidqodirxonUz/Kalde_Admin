@@ -8,7 +8,7 @@ const More = () => {
   const { id } = useParams();
   const [product, setProducts] = useState({});
   useEffect(() => {
-    fetch(`https://api.kalde.uz/${id}`)
+    fetch(`https://back.kalde.uz/${id}`)
       .then((res) => res.json())
       .then((data) => setProducts(data.data));
   }, []);
