@@ -13,8 +13,6 @@ import "/node_modules/bootstrap/dist/js/bootstrap";
 
 axios.defaults.baseURL = "https://back.kalde.uz";
 
-// axios.defaults.baseURL = "http://localhost:5000";
-
 axios.defaults.headers.access_token = localStorage.getItem("token");
 
 ReactDOM.createRoot(document.getElementById("root")).render(
