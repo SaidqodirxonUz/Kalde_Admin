@@ -20,11 +20,11 @@ const Footer = () => {
                 <li>
                   <h6 className=" mt-4">
                     <Link
-                      to={"t.me/real_coder"}
+                      to={"https://t.me/SaidqodirxonRahimov"}
                       target="_blank"
                       style={{ textDecoration: "none" }}
                     >
-                      RealCoderUz
+                      Saidqodirxon Rahimov
                     </Link>
                   </h6>
                 </li>

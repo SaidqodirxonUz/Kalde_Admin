@@ -11,7 +11,7 @@ import "./index.css";
 import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "/node_modules/bootstrap/dist/js/bootstrap";
 
-// axios.defaults.baseURL = "https://kalde.victoriaslove.uz";
+// axios.defaults.baseURL = "http://localhost:5000";
 
 axios.defaults.baseURL = "https://back.kalde.uz";
 

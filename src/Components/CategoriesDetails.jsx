@@ -8,7 +8,7 @@ const CategoriesDetails = () => {
   const [categories, setCategories] = useState({});
 
   useEffect(() => {
-    fetch(`https://back.kalde.uz/${id}`)
+    fetch(`https://back.kalde.uz/categories/${id}`)
       .then((res) => res.json())
       .then((data) => setCategories(data.data));
   }, [id]); // Include 'id' in the dependency array to re-fetch when id changes
