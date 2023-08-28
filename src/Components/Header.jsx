@@ -64,7 +64,7 @@ const Header = () => {
 
               <li className="nav-item ">
                 <Link className="btn btn-outline-warning fs-4" to="/editAdmin">
-                  <i class="fa-solid fa-user text-light"></i>
+                  <i className="fa-solid fa-user text-light"></i>
                 </Link>
               </li>
 
