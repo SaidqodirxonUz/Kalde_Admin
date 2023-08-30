@@ -10,21 +10,21 @@ import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 const ProductForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    uz_product_name: "",
-    ru_product_name: "",
-    en_product_name: "",
-    uz_desc: "",
-    ru_desc: "",
-    en_desc: "",
-    // category_id: "",
-    price: "",
-    barcode: "",
-    diametr: "",
-    ichki_diametr: "",
-    ichki_uzunlik: "",
-    tashqi_uzunlik: "",
-    razmer: "",
-    soni: "",
+    // uz_product_name: "",
+    // ru_product_name: "",
+    // en_product_name: "",
+    // uz_desc: "",
+    // ru_desc: "",
+    // en_desc: "",
+    // // category_id: "",
+    // price: "",
+    // barcode: "",
+    // diametr: "",
+    // ichki_diametr: "",
+    // ichki_uzunlik: "",
+    // tashqi_uzunlik: "",
+    // razmer: "",
+    // soni: "",
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -81,14 +81,7 @@ const ProductForm = () => {
 
     const formDataWithImage = new FormData();
 
-    if (
-      formData.diametr != null ||
-      formData.ichki_diametr != null ||
-      formData.ichki_uzunlik != null ||
-      formData.tashqi_uzunlik != null ||
-      formData.razmer != null ||
-      formData.soni != null
-    ) {
+    if (formData.diametr !== null && formData.soni !== null) {
       formDataWithImage.append("uz_product_name", formData.uz_product_name);
       formDataWithImage.append("ru_product_name", formData.ru_product_name);
       formDataWithImage.append("en_product_name", formData.en_product_name);
@@ -97,23 +90,20 @@ const ProductForm = () => {
       formDataWithImage.append("en_desc", formData.en_desc);
       formDataWithImage.append("price", formData.price);
       formDataWithImage.append("barcode", formData.barcode);
-
+      //
       formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-      formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
-      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-      formDataWithImage.append("razmer", formData.razmer);
       formDataWithImage.append("soni", formData.soni);
 
-      formDataWithImage.append("image", imageFile);
       formDataWithImage.append("category_id", selectedCategoryId);
+      if (imageFile) {
+        formDataWithImage.append("image", imageFile);
+      }
     } else if (
-      formData.diametr != null &&
-      formData.ichki_diametr != null &&
-      formData.ichki_uzunlik != null &&
-      formData.tashqi_uzunlik != null &&
-      formData.razmer != null &&
-      formData.soni != null
+      formData.diametr !== null &&
+      formData.ichki_diametr !== null &&
+      formData.ichki_uzunlik !== null &&
+      formData.tashqi_uzunlik !== null &&
+      formData.soni !== null
     ) {
       formDataWithImage.append("uz_product_name", formData.uz_product_name);
       formDataWithImage.append("ru_product_name", formData.ru_product_name);
@@ -123,50 +113,25 @@ const ProductForm = () => {
       formDataWithImage.append("en_desc", formData.en_desc);
       formDataWithImage.append("price", formData.price);
       formDataWithImage.append("barcode", formData.barcode);
-
+      //
       formDataWithImage.append("diametr", formData.diametr);
       formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
       formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
       formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-      formDataWithImage.append("razmer", formData.razmer);
       formDataWithImage.append("soni", formData.soni);
 
-      formDataWithImage.append("image", imageFile);
       formDataWithImage.append("category_id", selectedCategoryId);
-    }
-    if (
-      formData.diametr != "" ||
-      formData.ichki_diametr != "" ||
-      formData.ichki_uzunlik != "" ||
-      formData.tashqi_uzunlik != "" ||
-      formData.razmer != "" ||
-      formData.soni != ""
-    ) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-
-      formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-      formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
-      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
+      if (imageFile) {
+        formDataWithImage.append("image", imageFile);
+      }
+    } else if (formData.razmer !== null) {
       formDataWithImage.append("razmer", formData.razmer);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("image", imageFile);
-      formDataWithImage.append("category_id", selectedCategoryId);
     } else if (
-      formData.diametr != "" &&
-      formData.ichki_diametr != "" &&
-      formData.ichki_uzunlik != "" &&
-      formData.tashqi_uzunlik != "" &&
-      formData.razmer != "" &&
-      formData.soni != ""
+      formData.razmer !== null &&
+      formData.ichki_diametr !== null &&
+      formData.diametr !== null &&
+      formData.tashqi_uzunlik !== null &&
+      formData.soni !== null
     ) {
       formDataWithImage.append("uz_product_name", formData.uz_product_name);
       formDataWithImage.append("ru_product_name", formData.ru_product_name);
@@ -176,30 +141,99 @@ const ProductForm = () => {
       formDataWithImage.append("en_desc", formData.en_desc);
       formDataWithImage.append("price", formData.price);
       formDataWithImage.append("barcode", formData.barcode);
-
-      formDataWithImage.append("diametr", formData.diametr);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
       formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-      formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
+      formDataWithImage.append("diametr", formData.diametr);
       formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
+      formDataWithImage.append("soni", formData.soni);
+
+      formDataWithImage.append("category_id", selectedCategoryId);
+      if (imageFile) {
+        formDataWithImage.append("image", imageFile);
+      }
+    } else if (
+      formData.razmer !== null &&
+      formData.ichki_diametr !== null &&
+      formData.tashqi_uzunlik !== null &&
+      formData.soni !== null
+    ) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
+      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
+      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
+      formDataWithImage.append("soni", formData.soni);
+
+      formDataWithImage.append("category_id", selectedCategoryId);
+      if (imageFile) {
+        formDataWithImage.append("image", imageFile);
+      }
+    } else if (formData.razmer !== null && formData.soni !== null) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
       formDataWithImage.append("razmer", formData.razmer);
       formDataWithImage.append("soni", formData.soni);
 
-      formDataWithImage.append("image", imageFile);
       formDataWithImage.append("category_id", selectedCategoryId);
+      if (imageFile) {
+        formDataWithImage.append("image", imageFile);
+      }
+    } else if (
+      formData.razmer !== null &&
+      formData.diametr !== null &&
+      formData.soni !== null
+    ) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
+      formDataWithImage.append("diametr", formData.diametr);
+      formDataWithImage.append("soni", formData.soni);
+
+      formDataWithImage.append("category_id", selectedCategoryId);
+      if (imageFile) {
+        formDataWithImage.append("image", imageFile);
+      }
+    } else if (formData.razmer !== null) {
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+      //
+      formDataWithImage.append("razmer", formData.razmer);
+
+      formDataWithImage.append("category_id", selectedCategoryId);
+      if (imageFile) {
+        formDataWithImage.append("image", imageFile);
+      }
     } else {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-
-      formDataWithImage.append("image", imageFile);
-      formDataWithImage.append("category_id", selectedCategoryId);
+      toast("Вы добавляете не тот товар, невозможно добавить этот тип товара");
     }
-
     console.log(formData);
 
     try {
