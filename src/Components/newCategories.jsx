@@ -81,9 +81,9 @@ const CategoriesForm = () => {
       <Header />
       <div className="container mt-4 mb-5">
         <div className="d-flex justify-content-between mb-5">
-          <h2>Добавить новый продукт</h2>
+          <h2>Добавить новый Категория</h2>
           <Link to={`/categories`} className="btn btn-primary col-2 me-1">
-            <AiFillBackward /> Все продукты
+            <AiFillBackward /> Все Категории
           </Link>
         </div>
 
