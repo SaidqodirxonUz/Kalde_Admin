@@ -71,17 +71,6 @@ const ProductForm = () => {
     console.log(imageFile);
     const formDataWithImage = new FormData();
 
-    formDataWithImage.append("uz_product_name", formData.uz_product_name);
-    formDataWithImage.append("ru_product_name", formData.ru_product_name);
-    formDataWithImage.append("en_product_name", formData.en_product_name);
-    formDataWithImage.append("uz_desc", formData.uz_desc);
-    formDataWithImage.append("ru_desc", formData.ru_desc);
-    formDataWithImage.append("en_desc", formData.en_desc);
-    for (const file of imageFile) {
-      formDataWithImage.append("image", file);
-    }
-    formDataWithImage.append("category_id", selectedCategoryId);
-
     console.log(formData);
 
     try {
@@ -98,8 +87,6 @@ const ProductForm = () => {
       toast(response.data.message, { type: "success" });
       navigate("/products");
     } catch (error) {
-      console.log("Error adding product:", error);
-
       if (error) {
         // console.log("Server Response Data:", error.response.data);
         // console.log("Status Code:", error.response.status);
