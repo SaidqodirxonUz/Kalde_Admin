@@ -10,21 +10,21 @@ import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 const ProductForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    // uz_product_name: "",
-    // ru_product_name: "",
-    // en_product_name: "",
-    // uz_desc: "",
-    // ru_desc: "",
-    // en_desc: "",
-    // // category_id: "",
-    // price: "",
-    // barcode: "",
-    // diametr: "",
-    // ichki_diametr: "",
-    // ichki_uzunlik: "",
-    // tashqi_uzunlik: "",
-    // razmer: "",
-    // soni: "",
+    uz_product_name: null,
+    ru_product_name: null,
+    en_product_name: null,
+    uz_desc: null,
+    ru_desc: null,
+    en_desc: null,
+    // category_id: null,
+    price: null,
+    barcode: null,
+    diametr: null,
+    ichki_diametr: null,
+    ichki_uzunlik: null,
+    tashqi_uzunlik: null,
+    razmer: null,
+    soni: null,
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -63,8 +63,6 @@ const ProductForm = () => {
       ...prevData,
       [name]: value,
     }));
-
-    console.log({ name, value }), "Handle Input";
   };
 
   const handleImageChange = (event) => {
@@ -81,29 +79,32 @@ const ProductForm = () => {
 
     const formDataWithImage = new FormData();
 
-    if (formData.diametr !== null && formData.soni !== null) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (
-      formData.diametr !== null &&
-      formData.ichki_diametr !== null &&
-      formData.ichki_uzunlik !== null &&
-      formData.tashqi_uzunlik !== null &&
-      formData.soni !== null
+    if (
+      formData.diametr != null ||
+      formData.ichki_diametr != null ||
+      formData.ichki_uzunlik != null ||
+      formData.tashqi_uzunlik != null ||
+      formData.razmer != null ||
+      formData.soni != null ||
+      formData.diametr != null ||
+      (formData.diametr != null &&
+        formData.ichki_diametr != null &&
+        formData.ichki_uzunlik != null &&
+        formData.tashqi_uzunlik != null &&
+        formData.razmer != null &&
+        formData.soni != null &&
+        formData.diametr != null) ||
+      formData.ichki_diametr != "" ||
+      formData.ichki_uzunlik != "" ||
+      formData.tashqi_uzunlik != "" ||
+      formData.razmer != "" ||
+      formData.soni != "" ||
+      (formData.diametr != "" &&
+        formData.ichki_diametr != "" &&
+        formData.ichki_uzunlik != "" &&
+        formData.tashqi_uzunlik != "" &&
+        formData.razmer != "" &&
+        formData.soni != "")
     ) {
       formDataWithImage.append("uz_product_name", formData.uz_product_name);
       formDataWithImage.append("ru_product_name", formData.ru_product_name);
@@ -113,127 +114,30 @@ const ProductForm = () => {
       formDataWithImage.append("en_desc", formData.en_desc);
       formDataWithImage.append("price", formData.price);
       formDataWithImage.append("barcode", formData.barcode);
-      //
+
       formDataWithImage.append("diametr", formData.diametr);
       formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
       formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
       formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (formData.razmer !== null) {
-      formDataWithImage.append("razmer", formData.razmer);
-    } else if (
-      formData.razmer !== null &&
-      formData.ichki_diametr !== null &&
-      formData.diametr !== null &&
-      formData.tashqi_uzunlik !== null &&
-      formData.soni !== null
-    ) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-      formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (
-      formData.razmer !== null &&
-      formData.ichki_diametr !== null &&
-      formData.tashqi_uzunlik !== null &&
-      formData.soni !== null
-    ) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (formData.razmer !== null && formData.soni !== null) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
       formDataWithImage.append("razmer", formData.razmer);
       formDataWithImage.append("soni", formData.soni);
 
+      formDataWithImage.append("image", imageFile);
       formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (
-      formData.razmer !== null &&
-      formData.diametr !== null &&
-      formData.soni !== null
-    ) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-      formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (formData.razmer !== null) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
     } else {
-      toast("Вы добавляете не тот товар, невозможно добавить этот тип товара");
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      formDataWithImage.append("price", formData.price);
+      formDataWithImage.append("barcode", formData.barcode);
+
+      formDataWithImage.append("image", imageFile);
+      formDataWithImage.append("category_id", selectedCategoryId);
     }
+
     console.log(formData);
 
     try {
@@ -241,8 +145,6 @@ const ProductForm = () => {
 
       const response = await axios.post("/products", formDataWithImage, {
         headers: {
-          "Access-Control-Allow-Origin": "*",
-
           "Content-Type": "multipart/form-data", // Use the correct content type
           Authorization: localStorage.getItem("token"),
         },
@@ -253,15 +155,6 @@ const ProductForm = () => {
       navigate("/products");
     } catch (error) {
       console.log("Error adding product:", error.message);
-
-      if (error.message == "Network Error") {
-        return toast("Не удалось подключиться", { type: "warning" });
-      }
-
-      if (error.code == 413) {
-        navigate("/login");
-        localStorage.removeItem("token");
-      }
 
       if (error) {
         // console.log("Server Response Data:", error.response.data);
