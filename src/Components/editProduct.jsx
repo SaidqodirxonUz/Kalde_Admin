@@ -391,7 +391,7 @@ const editProduct = () => {
               Цена :
             </label>
             <input
-              type="number"
+              type="text"
               id="price"
               name="price"
               value={formData.price}
@@ -404,7 +404,7 @@ const editProduct = () => {
               Штрих-код :
             </label>
             <input
-              type="number"
+              type="text"
               id="barcode"
               name="barcode"
               value={formData.barcode}
@@ -417,7 +417,7 @@ const editProduct = () => {
               Диаметр :
             </label>
             <input
-              type="number"
+              type="text"
               id="diametr"
               name="diametr"
               value={formData.diametr}
@@ -431,7 +431,7 @@ const editProduct = () => {
               Внутренний диаметр :
             </label>
             <input
-              type="number"
+              type="text"
               id="ichki_diametr"
               name="ichki_diametr"
               value={formData.ichki_diametr}
@@ -445,7 +445,7 @@ const editProduct = () => {
               Внутренняя длина :
             </label>
             <input
-              type="number"
+              type="text"
               id="ichki_uzunlik"
               name="ichki_uzunlik"
               value={formData.ichki_uzunlik}
@@ -459,7 +459,7 @@ const editProduct = () => {
               Внешняя длина :
             </label>
             <input
-              type="number"
+              type="text"
               id="tashqi_uzunlik"
               name="tashqi_uzunlik"
               value={formData.tashqi_uzunlik}
@@ -474,7 +474,7 @@ const editProduct = () => {
               Размер :
             </label>
             <input
-              type="number"
+              type="text"
               id="razmer"
               name="razmer"
               value={formData.razmer}
@@ -489,7 +489,7 @@ const editProduct = () => {
               Номер :
             </label>
             <input
-              type="number"
+              type="text"
               id="soni"
               name="soni"
               value={formData.soni}
