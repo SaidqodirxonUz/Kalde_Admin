@@ -281,7 +281,7 @@ const EditDealers = () => {
               Номер телефона
             </label>
             <input
-              type="tel"
+              type="text"
               id="phone_number"
               name="phone_number"
               value={formData.phone}

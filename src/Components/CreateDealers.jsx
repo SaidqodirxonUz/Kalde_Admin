@@ -271,7 +271,7 @@ const CreateDealers = () => {
               <span className="text-danger">Обязательно</span> :
             </label>
             <input
-              type="tel"
+              type="text"
               id="phone_number"
               name="phone_number"
               // value={formData.desc_en}
@@ -286,7 +286,7 @@ const CreateDealers = () => {
               <span className="text-danger">Необязательно</span> :
             </label>
             <input
-              type="tel"
+              type="text"
               id="addition_number"
               name="addition_number"
               // value={formData.desc_en}
