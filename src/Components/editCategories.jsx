@@ -39,6 +39,7 @@ const EditCategories = () => {
     formDataWithImage.append("uz_category_name", formData.uz_category_name);
     formDataWithImage.append("ru_category_name", formData.ru_category_name);
     formDataWithImage.append("en_category_name", formData.en_category_name);
+
     if (imageFile) {
       formDataWithImage.append("image", imageFile);
     }
@@ -52,6 +53,7 @@ const EditCategories = () => {
         {
           headers: {
             Authorization: localStorage.getItem("token"),
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "multipart/form-data", // Set the Content-Type header
           },
         }
