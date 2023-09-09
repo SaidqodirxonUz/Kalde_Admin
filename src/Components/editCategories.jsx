@@ -53,7 +53,7 @@ const EditCategories = () => {
         {
           headers: {
             Authorization: localStorage.getItem("token"),
-            "Access-Control-Allow-Origin": "*",
+
             "Content-Type": "multipart/form-data", // Set the Content-Type header
           },
         }

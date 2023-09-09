@@ -92,7 +92,7 @@ const EditDealers = () => {
       const response = await axios.patch(`/dealers/${id}`, formDataWithImage, {
         headers: {
           "Content-Type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*",
+
           Authorization: localStorage.getItem("token"),
         },
       });
