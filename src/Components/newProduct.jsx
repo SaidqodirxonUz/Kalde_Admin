@@ -146,7 +146,7 @@ const ProductForm = () => {
       const response = await axios.post("/products", formDataWithImage, {
         headers: {
           "Content-Type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*",
+
           Authorization: localStorage.getItem("token"),
         },
       });

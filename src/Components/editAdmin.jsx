@@ -40,7 +40,7 @@ const EditAdmin = () => {
       const response = await axios.patch(`/admin/me`, formDataWithImage, {
         headers: {
           Authorization: localStorage.getItem("token"),
-          "Access-Control-Allow-Origin": "*",
+
           "Content-Type": "application/json", // Set the Content-Type header
         },
       });
