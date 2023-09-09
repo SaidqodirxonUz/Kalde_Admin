@@ -53,6 +53,7 @@ const CreateNews = () => {
       const response = await axios.post("/news", formDataWithImage, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
           Authorization: localStorage.getItem("token"),
         },
       });
