@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "./Footer";
 import { Link, useParams } from "react-router-dom";
-import { AiFillBackward, AiOutlinePlus, AiOutlineSave } from "react-icons/ai";
+import { AiFillBackward, AiOutlineSave } from "react-icons/ai";
 
 const editProduct = () => {
   let { id } = useParams();
@@ -18,14 +18,6 @@ const editProduct = () => {
     ru_desc: "",
     en_desc: "",
     category_id: null,
-    price: "",
-    barcode: "",
-    diametr: "",
-    ichki_diametr: "",
-    ichki_uzunlik: "",
-    tashqi_uzunlik: "",
-    razmer: "",
-    soni: "",
     image: null,
   });
 
@@ -66,7 +58,6 @@ const editProduct = () => {
       }
     }
 
-    // fetchCategories();
     if (id) {
       fetchProductDetails();
     }
