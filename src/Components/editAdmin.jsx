@@ -8,7 +8,6 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { AiFillBackward, AiOutlineSave } from "react-icons/ai";
 
 const EditAdmin = () => {
-  let { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -38,27 +37,28 @@ const EditAdmin = () => {
     try {
       setIsUploading(true);
 
-      const response = await axios.patch(`/admin/1`, formDataWithImage, {
+      const response = await axios.patch(`/admin/me`, formDataWithImage, {
         headers: {
           Authorization: localStorage.getItem("token"),
-          "Content-Type": "multipart/form-data", // Set the Content-Type header
+          "Content-Type": "application/json", // Set the Content-Type header
         },
       });
 
       console.log(response.data);
       toast.success("Admin успешно обновлена");
 
-      //   navigate("/categories");
+      navigate("/");
 
       // Clear form inputs after successful submission
-      setFormData({
-        full_name: "",
-        phone_number: "",
-        password: "",
-      });
-      setImageFile(null);
+      // setFormData({
+      //   full_name: "",
+      //   phone_number: "",
+      //   password: "",
+      // });
+
+      // setImageFile(null);
     } catch (error) {
-      console.log("Error updating admin:", error.message);
+      console.log("Error updating admin:", error);
 
       toast("Не удалось обновить Admin", {
         type: "error",

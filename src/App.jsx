@@ -24,7 +24,6 @@ import EditDealers from "./Components/EditDealers.jsx";
 import EditAdmin from "./Components/editAdmin.jsx";
 
 import DealerDetails from "./Components/DealerDetails.jsx";
-import EditAdmin from "./Components/editAdmin.jsx";
 
 function App() {
   return (
@@ -54,7 +53,7 @@ function App() {
 
         <Route path="/editAdmin" element={<EditAdmin />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/editAdmin/" element={<EditAdmin />} />
+
         <Route path="/contact" element={<Contact />} />
         <Route path="/public-offer" element={<Oferta />} />
         <Route path="*" element={<Redirect />} />
