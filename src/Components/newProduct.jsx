@@ -4,10 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 
 const ProductForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     uz_product_name: "",
     ru_product_name: "",
@@ -15,23 +16,13 @@ const ProductForm = () => {
     uz_desc: "",
     ru_desc: "",
     en_desc: "",
-    category_id: 1,
-    price: "",
-    barcode: "",
-    diametr: "",
-    ichki_diametr: "",
-    ichki_uzunlik: "",
-    tashqi_uzunlik: "",
-    razmer: "",
-    soni: "",
-    image: null,
   });
 
   const [imageFile, setImageFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const [categories, setCategories] = useState([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState(0); // Initialize with null or appropriate default value
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -66,7 +57,8 @@ const ProductForm = () => {
   };
 
   const handleImageChange = (event) => {
-    setImageFile(event.target.files[0]);
+    console.log(event.target.files);
+    setImageFile(event.target.files);
   };
 
   const handleSubmit = async (event) => {
@@ -76,45 +68,45 @@ const ProductForm = () => {
       toast.error("Вы должны выбрать картинку.", { type: "error" });
       return;
     }
-
-    const categoryIdAsNumber = Number(selectedCategoryId); // Convert to number
-    console.log("Category Id As Number  bu ", categoryIdAsNumber);
-    console.log("Category Id As Number type bu  ", typeof categoryIdAsNumber);
-
+    console.log(imageFile);
     const formDataWithImage = new FormData();
 
-    formDataWithImage.append("image", imageFile);
-    formDataWithImage.append("category_id", categoryIdAsNumber); // Use the converted value
+    formDataWithImage.append("uz_product_name", formData.uz_product_name);
+    formDataWithImage.append("ru_product_name", formData.ru_product_name);
+    formDataWithImage.append("en_product_name", formData.en_product_name);
+    formDataWithImage.append("uz_desc", formData.uz_desc);
+    formDataWithImage.append("ru_desc", formData.ru_desc);
+    formDataWithImage.append("en_desc", formData.en_desc);
+    for (const file of imageFile) {
+      formDataWithImage.append("image", file);
+    }
+    formDataWithImage.append("category_id", selectedCategoryId);
+
+    console.log(formData);
 
     try {
       setIsUploading(true);
 
       const response = await axios.post("/products", formDataWithImage, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data", // Use the correct content type
           Authorization: localStorage.getItem("token"),
         },
       });
 
       console.log("Product added:", response.data.data);
       toast(response.data.message, { type: "success" });
+      navigate("/products");
     } catch (error) {
-      console.log(formData);
-      console.log(formData.price);
-      console.log("price type bu ", typeof formData.price);
+      console.log("Error adding product:", error);
 
-      console.log("Error adding product:", error.message);
-      toast(error.message, { type: "error" });
-
-      if (error.response) {
-        console.log("Server Response Data:", error.response.data);
-        console.log("Status Code:", error.response.status);
-        toast("Ошибка добавления продукта", { type: "error" });
-      }
-      if (
-        error.message ==
-        'Произошла ошибка error: insert into "images" ("filename", "image_url") values ($1, $2) returning "id", "image_url", "filename" - duplicate key value violates unique constraint "images_filename_unique"'
-      ) {
+      if (error) {
+        // console.log("Server Response Data:", error.response.data);
+        // console.log("Status Code:", error.response.status);
+        toast("Ошибка добавления продукта & Проверьте штрих-код", {
+          type: "error",
+        });
+        // toast(error.data.errMessage, { type: "error" });
         toast("Изображение с таким названием уже загружено", { type: "error" });
       }
     } finally {
@@ -133,7 +125,7 @@ const ProductForm = () => {
           </Link>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="mb-3">
             <label htmlFor="uz_product_name" className="form-label">
               Имя (узбекский) <span className="text-danger">Обязательно</span> :
@@ -226,140 +218,27 @@ const ProductForm = () => {
             <select
               id="category_id"
               name="category_id"
-              value={selectedCategoryId} // No need for Number() conversion here
+              value={selectedCategoryId}
               onChange={handleCategoryChange}
               className="form-control"
               required
             >
               <option value="">Выберите категорию</option>
               {categories.map((category) => (
-                <option value={category.id}>{category.ru_category_name}</option>
+                <option key={category.id} value={category.id}>
+                  {category.ru_category_name}
+                </option>
               ))}
             </select>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="price" className="form-label">
-              Цена <span className="text-danger">Обязательно</span> :
-            </label>
-            <input
-              type="text"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleInputChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="barcode" className="form-label">
-              Штрих-код <span className="text-danger">Обязательно</span> :
-            </label>
-            <input
-              type="number"
-              id="barcode"
-              name="barcode"
-              value={formData.barcode}
-              onChange={handleInputChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="diametr" className="form-label">
-              Диаметр <span className="text-danger">Необязательно</span> :
-            </label>
-            <input
-              type="number"
-              id="diametr"
-              name="diametr"
-              value={formData.diametr}
-              onChange={handleInputChange}
-              className="form-control"
-              // required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="ichki_diametr" className="form-label">
-              Внутренний диаметр{" "}
-              <span className="text-danger">Необязательно</span>:
-            </label>
-            <input
-              type="number"
-              id="ichki_diametr"
-              name="ichki_diametr"
-              value={formData.ichki_diametr}
-              onChange={handleInputChange}
-              className="form-control"
-              // required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="ichki_uzunlik" className="form-label">
-              Внутренняя длина{" "}
-              <span className="text-danger">Необязательно</span>:
-            </label>
-            <input
-              type="number"
-              id="ichki_uzunlik"
-              name="ichki_uzunlik"
-              value={formData.ichki_uzunlik}
-              onChange={handleInputChange}
-              className="form-control"
-              // required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="tashqi_uzunlik" className="form-label">
-              Внешняя длина <span className="text-danger">Необязательно</span>:
-            </label>
-            <input
-              type="number"
-              id="tashqi_uzunlik"
-              name="tashqi_uzunlik"
-              value={formData.tashqi_uzunlik}
-              onChange={handleInputChange}
-              className="form-control"
-              // required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="razmer" className="form-label">
-              Размер <span className="text-danger">Необязательно</span>:
-            </label>
-            <input
-              type="number"
-              id="razmer"
-              name="razmer"
-              value={formData.razmer}
-              onChange={handleInputChange}
-              className="form-control"
-              // required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="soni" className="form-label">
-              Номер <span className="text-danger">Необязательно</span> :
-            </label>
-            <input
-              type="number"
-              id="soni"
-              name="soni"
-              value={formData.soni}
-              onChange={handleInputChange}
-              className="form-control"
-              // required
-            />
           </div>
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-              Изображение<span className="text-danger"> Необязательно</span> :
+              Изображение<span className="text-danger"> Oбязательно</span> :
             </label>
             <input
               type="file"
+              multiple
               id="image"
               accept="image/*"
               onChange={handleImageChange}

@@ -4,17 +4,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "./Footer";
-import { Link, useParams } from "react-router-dom";
-import { AiFillBackward, AiOutlinePlus, AiOutlineSave } from "react-icons/ai";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { AiFillBackward, AiOutlineSave } from "react-icons/ai";
 
 const EditCategories = () => {
   let { id } = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     uz_category_name: "",
     ru_category_name: "",
     en_category_name: "",
-    image: null,
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -27,34 +27,18 @@ const EditCategories = () => {
       [name]: value,
     }));
   };
+
   const handleImageChange = (event) => {
     setImageFile(event.target.files[0]);
   };
-
-  useEffect(() => {
-    async function fetchCategoriesDetails() {
-      try {
-        const response = await axios.get(`/categories/${id}`);
-        const categoriesData = response.data.data;
-        setFormData(categoriesData);
-        toast.success("Успешно");
-      } catch (error) {
-        console.error("Error fetching category details:", error);
-      }
-    }
-
-    if (id) {
-      fetchCategoriesDetails();
-    }
-  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formDataWithImage = new FormData();
-    for (const key in formData) {
-      formDataWithImage.append(key, formData[key]);
-    }
+    formDataWithImage.append("uz_category_name", formData.uz_category_name);
+    formDataWithImage.append("ru_category_name", formData.ru_category_name);
+    formDataWithImage.append("en_category_name", formData.en_category_name);
     if (imageFile) {
       formDataWithImage.append("image", imageFile);
     }
@@ -67,45 +51,70 @@ const EditCategories = () => {
         formDataWithImage,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
             Authorization: localStorage.getItem("token"),
+            "Content-Type": "multipart/form-data", // Set the Content-Type header
           },
         }
       );
 
-      console.log(response.data.message);
-      toast.success(response.data.message);
+      console.log(response.data);
+      toast.success("Категория успешно обновлена");
+
+      navigate("/categories");
+
+      // Clear form inputs after successful submission
+      setFormData({
+        uz_category_name: "",
+        ru_category_name: "",
+        en_category_name: "",
+      });
+      setImageFile(null);
     } catch (error) {
       console.log("Error updating category:", error);
 
-      if (error.response) {
-        console.log("Error response data:", error.response.data);
-        console.log("Error response status:", error.response.status);
-      }
-
-      toast("An error occurred while updating the category.", {
+      toast("Не удалось обновить категорию", {
         type: "error",
       });
+      toast("Изображение с таким названием уже загружено", { type: "error" });
     } finally {
       setIsUploading(false);
     }
   };
+
+  useEffect(() => {
+    async function fetchCategoriesDetails() {
+      try {
+        const response = await axios.get(`/categories/${id}`);
+        const categoriesData = response.data.data;
+        setFormData(categoriesData);
+        // toast.success("Успешно");
+      } catch (error) {
+        console.error("Error fetching category details:", error);
+        toast("Произошла ошибка, попробуйте еще раз", { type: "warning" });
+        navigate("/categories");
+      }
+    }
+
+    if (id) {
+      fetchCategoriesDetails();
+    }
+  }, [id]);
 
   return (
     <>
       <Header />
       <div className="container mt-4 mb-5">
         <div className="d-flex justify-content-between mb-5">
-          <h2>Edit {id} Category</h2>
+          <h2>Изменить категорию {id} </h2>
           <Link to={`/products`} className="btn btn-primary col-2 me-1">
-            <AiFillBackward /> Hamma Categorylar
+            <AiFillBackward /> Все категории
           </Link>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="uz_category_name" className="form-label">
-              Nomi (Uzbek):
+              Имя (узбекский) :
             </label>
             <input
               type="text"
@@ -118,7 +127,7 @@ const EditCategories = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="ru_category_name" className="form-label">
-              Nomi (Russian):
+              Имя (Русский) :
             </label>
             <input
               type="text"
@@ -131,7 +140,7 @@ const EditCategories = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="en_category_name" className="form-label">
-              Nomi (English):
+              Имя (Английский) :
             </label>
             <input
               type="text"
@@ -145,7 +154,7 @@ const EditCategories = () => {
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
-              Rasm:
+              Изображение :
             </label>
             <input
               type="file"
@@ -157,13 +166,13 @@ const EditCategories = () => {
             />
           </div>
           <div>
-            {isUploading && <p>Yuklanmoqda...</p>}
+            {isUploading && <p>Загрузка, пожалуйста подождите ....</p>}
             <button
               type="submit" // Changed to type="submit"
               className="btn btn-primary mb-5 col-3 me-1"
               disabled={isUploading}
             >
-              <AiOutlineSave /> Saqlash
+              <AiOutlineSave /> Добавлять
             </button>
           </div>
         </form>
