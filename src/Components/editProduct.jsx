@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "./Footer";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { AiFillBackward, AiOutlinePlus, AiOutlineSave } from "react-icons/ai";
+import { AiFillBackward, AiOutlineSave } from "react-icons/ai";
 
 const editProduct = () => {
   let { id } = useParams();
@@ -19,14 +19,6 @@ const editProduct = () => {
     ru_desc: "",
     en_desc: "",
     category_id: null,
-    price: "",
-    barcode: "",
-    diametr: "",
-    ichki_diametr: "",
-    ichki_uzunlik: "",
-    tashqi_uzunlik: "",
-    razmer: "",
-    soni: "",
     image: null,
   });
 
@@ -85,180 +77,19 @@ const editProduct = () => {
   };
 
   const handleImageChange = (event) => {
-    setImageFile(event.target.files[0]);
+    setImageFile(event.target.files);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formDataWithImage = new FormData();
-    if (formData.diametr !== null && formData.soni !== null) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("soni", formData.soni);
 
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (
-      formData.diametr !== null &&
-      formData.ichki_diametr !== null &&
-      formData.ichki_uzunlik !== null &&
-      formData.tashqi_uzunlik !== null &&
-      formData.soni !== null
-    ) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-      formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
-      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (formData.razmer !== null) {
-      formDataWithImage.append("razmer", formData.razmer);
-    } else if (
-      formData.razmer !== null &&
-      formData.ichki_diametr !== null &&
-      formData.diametr !== null &&
-      formData.tashqi_uzunlik !== null &&
-      formData.soni !== null
-    ) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-      formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (
-      formData.razmer !== null &&
-      formData.ichki_diametr !== null &&
-      formData.tashqi_uzunlik !== null &&
-      formData.soni !== null
-    ) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-      formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-      formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (formData.razmer !== null && formData.soni !== null) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (
-      formData.razmer !== null &&
-      formData.diametr !== null &&
-      formData.soni !== null
-    ) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-      formDataWithImage.append("diametr", formData.diametr);
-      formDataWithImage.append("soni", formData.soni);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else if (formData.razmer !== null) {
-      formDataWithImage.append("uz_product_name", formData.uz_product_name);
-      formDataWithImage.append("ru_product_name", formData.ru_product_name);
-      formDataWithImage.append("en_product_name", formData.en_product_name);
-      formDataWithImage.append("uz_desc", formData.uz_desc);
-      formDataWithImage.append("ru_desc", formData.ru_desc);
-      formDataWithImage.append("en_desc", formData.en_desc);
-      formDataWithImage.append("price", formData.price);
-      formDataWithImage.append("barcode", formData.barcode);
-      //
-      formDataWithImage.append("razmer", formData.razmer);
-
-      formDataWithImage.append("category_id", selectedCategoryId);
-      if (imageFile) {
-        formDataWithImage.append("image", imageFile);
-      }
-    } else {
-      toast("Вы добавляете не тот товар, невозможно добавить этот тип товара");
-    }
-
-    // formDataWithImage.append("category_id", selectedCategoryId);
-
-    // formDataWithImage.append("diametr", formData.diametr);
-    // formDataWithImage.append("ichki_diametr", formData.ichki_diametr);
-    // formDataWithImage.append("ichki_uzunlik", formData.ichki_uzunlik);
-    // formDataWithImage.append("tashqi_uzunlik", formData.tashqi_uzunlik);
-    // formDataWithImage.append("razmer", formData.razmer);
-    // formDataWithImage.append("soni", formData.soni);
 
     console.log("FORMDATA WITH IMAGE", formDataWithImage);
     console.log("FORMDATA", formData);
 
-    console.log("image", imageFile);
+
     try {
       setIsUploading(true);
 
@@ -273,7 +104,7 @@ const editProduct = () => {
       toast.success("Товар успешно обновлена");
       navigate("/products");
     } catch (error) {
-      console.error("Error updating product:", error.message);
+      console.error("Error updating product:", error);
       toast.error("Failed to update product");
     } finally {
       setIsUploading(false);
@@ -388,124 +219,13 @@ const editProduct = () => {
             </select>
           </div>
           <div className="mb-3">
-            <label htmlFor="price" className="form-label">
-              Цена :
-            </label>
-            <input
-              type="text"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="barcode" className="form-label">
-              Штрих-код :
-            </label>
-            <input
-              type="text"
-              id="barcode"
-              name="barcode"
-              value={formData.barcode}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="diametr" className="form-label">
-              Диаметр :
-            </label>
-            <input
-              type="text"
-              id="diametr"
-              name="diametr"
-              value={formData.diametr}
-              onChange={handleInputChange}
-              className="form-control"
-              //
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="ichki_diametr" className="form-label">
-              Внутренний диаметр :
-            </label>
-            <input
-              type="text"
-              id="ichki_diametr"
-              name="ichki_diametr"
-              value={formData.ichki_diametr}
-              onChange={handleInputChange}
-              className="form-control"
-              //
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="ichki_uzunlik" className="form-label">
-              Внутренняя длина :
-            </label>
-            <input
-              type="text"
-              id="ichki_uzunlik"
-              name="ichki_uzunlik"
-              value={formData.ichki_uzunlik}
-              onChange={handleInputChange}
-              className="form-control"
-              //
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="tashqi_uzunlik" className="form-label">
-              Внешняя длина :
-            </label>
-            <input
-              type="text"
-              id="tashqi_uzunlik"
-              name="tashqi_uzunlik"
-              value={formData.tashqi_uzunlik}
-              onChange={handleInputChange}
-              className="form-control"
-              //
-            />
-          </div>
 
-          <div className="mb-3">
-            <label htmlFor="razmer" className="form-label">
-              Размер :
-            </label>
-            <input
-              type="text"
-              id="razmer"
-              name="razmer"
-              value={formData.razmer}
-              onChange={handleInputChange}
-              className="form-control"
-              //
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="soni" className="form-label">
-              Номер :
-            </label>
-            <input
-              type="text"
-              id="soni"
-              name="soni"
-              value={formData.soni}
-              onChange={handleInputChange}
-              className="form-control"
-              //
-            />
-          </div>
-
-          <div className="mb-3">
             <label htmlFor="image" className="form-label">
               Изображение :
             </label>
             <input
               type="file"
+              multiple
               id="image"
               accept="image/*"
               onChange={handleImageChange}

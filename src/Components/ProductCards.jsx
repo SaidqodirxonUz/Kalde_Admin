@@ -51,7 +51,7 @@ const ProductCards = () => {
         <div key={product.id} className="col-md-6 col-lg-3">
           <div className="card overflow-hidden" aria-hidden="true">
             <img
-              src={product.image_url}
+              src={product.img_url}
               alt={product.title_ru}
               className="card-image-top placeholder-card-image"
             />
@@ -65,10 +65,6 @@ const ProductCards = () => {
                       product.ru_product_name // Nom
                     }
                   </span>
-                  <span>narxi {product.price}</span>
-                </span>
-                <span className="product-description my-3">
-                  Шитрикс код : {product.barcode}
                 </span>
               </p>
               <div className="d-flex g-3">
