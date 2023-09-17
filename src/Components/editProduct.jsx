@@ -85,8 +85,10 @@ const editProduct = () => {
 
     const formDataWithImage = new FormData();
 
+
     console.log("FORMDATA WITH IMAGE", formDataWithImage);
     console.log("FORMDATA", formData);
+
 
     try {
       setIsUploading(true);
@@ -217,6 +219,7 @@ const editProduct = () => {
             </select>
           </div>
           <div className="mb-3">
+
             <label htmlFor="image" className="form-label">
               Изображение :
             </label>

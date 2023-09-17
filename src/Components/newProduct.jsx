@@ -10,12 +10,14 @@ import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 const ProductForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+
     uz_product_name: "",
     ru_product_name: "",
     en_product_name: "",
     uz_desc: "",
     ru_desc: "",
     en_desc: "",
+
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -70,6 +72,7 @@ const ProductForm = () => {
     }
     console.log(imageFile);
     const formDataWithImage = new FormData();
+
 
     console.log(formData);
 
@@ -219,6 +222,7 @@ const ProductForm = () => {
               ))}
             </select>
           </div>
+
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
