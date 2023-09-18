@@ -10,14 +10,12 @@ import { AiFillBackward, AiOutlinePlus } from "react-icons/ai";
 const ProductForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-
     uz_product_name: "",
     ru_product_name: "",
     en_product_name: "",
     uz_desc: "",
     ru_desc: "",
     en_desc: "",
-
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -73,6 +71,16 @@ const ProductForm = () => {
     console.log(imageFile);
     const formDataWithImage = new FormData();
 
+    formDataWithImage.append("uz_product_name", formData.uz_product_name);
+    formDataWithImage.append("ru_product_name", formData.ru_product_name);
+    formDataWithImage.append("en_product_name", formData.en_product_name);
+    formDataWithImage.append("uz_desc", formData.uz_desc);
+    formDataWithImage.append("ru_desc", formData.ru_desc);
+    formDataWithImage.append("en_desc", formData.en_desc);
+    for (const file of imageFile) {
+      formDataWithImage.append("image", file);
+    }
+    formDataWithImage.append("category_id", selectedCategoryId);
 
     console.log(formData);
 
@@ -81,8 +89,7 @@ const ProductForm = () => {
 
       const response = await axios.post("/products", formDataWithImage, {
         headers: {
-          "Content-Type": "multipart/form-data",
-
+          "Content-Type": "multipart/form-data", // Use the correct content type
           Authorization: localStorage.getItem("token"),
         },
       });
@@ -91,6 +98,8 @@ const ProductForm = () => {
       toast(response.data.message, { type: "success" });
       navigate("/products");
     } catch (error) {
+      console.log("Error adding product:", error);
+
       if (error) {
         // console.log("Server Response Data:", error.response.data);
         // console.log("Status Code:", error.response.status);
@@ -222,7 +231,6 @@ const ProductForm = () => {
               ))}
             </select>
           </div>
-
 
           <div className="mb-3">
             <label htmlFor="image" className="form-label">
