@@ -180,7 +180,7 @@ const ProductForm = () => {
               value={formData.uz_desc}
               onChange={handleInputChange}
               className="form-control"
-              required
+              // required
             />
           </div>
           <div className="mb-3">
@@ -194,7 +194,7 @@ const ProductForm = () => {
               value={formData.ru_desc}
               onChange={handleInputChange}
               className="form-control"
-              required
+              // required
             />
           </div>
           <div className="mb-3">
@@ -208,7 +208,7 @@ const ProductForm = () => {
               value={formData.en_desc}
               onChange={handleInputChange}
               className="form-control"
-              required
+              // required
             />
           </div>
           <div className="mb-3">
