@@ -13,9 +13,9 @@ const ProductForm = () => {
     uz_product_name: "",
     ru_product_name: "",
     en_product_name: "",
-    uz_desc: "",
-    ru_desc: "",
-    en_desc: "",
+    // uz_desc: null,
+    // ru_desc: null,
+    // en_desc: null,
   });
 
   const [imageFile, setImageFile] = useState(null);
