@@ -51,7 +51,7 @@ const ProductCards = () => {
         <div key={product.id} className="col-md-6 col-lg-3">
           <div className="card overflow-hidden" aria-hidden="true">
             <img
-              src={product.img_url}
+              src={product.image_url}
               alt={product.title_ru}
               className="card-image-top placeholder-card-image"
             />

@@ -49,7 +49,7 @@ export function useNews() {
           prevNews.filter((category) => category.id !== id)
         );
 
-        toast.info("ПРАЙС удалена");
+        toast.info("Прайс удалена");
       }
     } catch (error) {
       toast.error(error.message);

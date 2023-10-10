@@ -13,7 +13,7 @@ const NewsCards = () => {
 
   const handleDelete = async (id) => {
     try {
-      if (window.confirm("Вы уверены, что хотите удалить эту ПРАЙС?")) {
+      if (window.confirm("Вы уверены, что хотите удалить эту Прайс?")) {
         await deleteNews(id);
       }
     } catch (error) {
@@ -28,9 +28,9 @@ const NewsCards = () => {
     return (
       <div>
         <div className="d-flex justify-content-between">
-          <h2>ПРАЙС пока нет</h2>
+          <h2>Прайс пока нет</h2>
           <Link to={`/createNews`} className="btn btn-primary col-2 me-1">
-            <AiOutlinePlus /> Добавить ПРАЙС
+            <AiOutlinePlus /> Добавить Прайс
           </Link>
         </div>
       </div>
@@ -40,10 +40,10 @@ const NewsCards = () => {
   return (
     <div className="row g-3">
       <div className="d-flex justify-content-between">
-        <h2>ПРАЙС</h2>
+        <h2>Прайс</h2>
         <Link to={`/createNews`} className="btn btn-primary col-2 me-1">
           <AiOutlinePlus />
-          Добавить ПРАЙС
+          Добавить Прайс
         </Link>
       </div>
       {news.map((News) => (
@@ -58,7 +58,7 @@ const NewsCards = () => {
               </p>
               <span className="d-flex justify-content-between align-items-center">
                 <span className="text-danger">
-                  ПРАЙС :{" "}
+                  Прайс :{" "}
                   <a href={News.image_url} target="_blank">
                     обзор
                   </a>

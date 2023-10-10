@@ -68,7 +68,7 @@ const CreateNews = () => {
       if (error.message) {
         console.log("Server Response Data:", error.response.data);
         console.log("Status Code:", error.response.status);
-        toast("Ошибка добавления ПРАЙС", { type: "error" });
+        toast("Ошибка добавления Прайс", { type: "error" });
       }
       if (
         error.message ==
@@ -86,9 +86,9 @@ const CreateNews = () => {
       <Header />
       <div className="container mt-4 mb-5">
         <div className="d-flex justify-content-between mb-5">
-          <h2>Добавить ПРАЙС</h2>
+          <h2>Добавить Прайс</h2>
           <Link to={`/news`} className="btn btn-primary col-2 me-1">
-            <AiFillBackward /> Все ПРАЙС
+            <AiFillBackward /> Все Прайс
           </Link>
         </div>
 

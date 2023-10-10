@@ -13,6 +13,7 @@ const More = () => {
     fetch(`https://back.kalde.uz/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data.data))
+
       .catch((error) => {
         console.error("Error fetching product:", error);
       });
@@ -20,6 +21,7 @@ const More = () => {
 
   if (!product) {
     // Loading state
+
     return (
       <>
         <Header />
@@ -46,11 +48,7 @@ const More = () => {
                 }}
               >
                 <img
-                  src={product?.img_url}
-                  className="placeholder-card-image d-flex align-items-center justify-content-center card-image-top bg-light"
-                />
-                <img
-                  src={product?.img1_url}
+                  src={product.image_url}
                   className="placeholder-card-image d-flex align-items-center justify-content-center card-image-top bg-light"
                 />
               </div>

@@ -53,7 +53,7 @@ const Newsdetails = () => {
 
                   <span className="d-flex justify-content-between align-items-center">
                     <span className="text-danger">
-                      ПРАЙС :{" "}
+                      Прайс :{" "}
                       <a href={news.image_url} target="_blank">
                         обзор
                       </a>
