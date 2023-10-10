@@ -49,7 +49,7 @@ export function useDealers() {
           prevdealers.filter((category) => category.id !== id)
         );
 
-        toast.info("Новости удалена");
+        toast.info("ПРАЙС удалена");
       }
     } catch (error) {
       toast.error(error.message);

@@ -37,12 +37,6 @@ const Newsdetails = () => {
         <div className="row g-3 mb-5">
           <div className="col-12 h-100 pt-5">
             <div className="card overflow-hidden" aria-hidden="true">
-              <img
-                src={news.image_url}
-                className="placeholder-card-image d-flex align-items-center justify-content-center card-image-top bg-light"
-                alt=""
-              />
-
               <div className="card-body">
                 <div className="card-text">
                   <h5 className="news-description my-3">ID : {news.id}</h5>
@@ -56,6 +50,16 @@ const Newsdetails = () => {
                   <div className="col-6 d-flex justify-content-between">
                     {/* <h6 className="fs-2">{news.category}</h6> */}
                   </div>
+
+                  <span className="d-flex justify-content-between align-items-center">
+                    <span className="text-danger">
+                      ПРАЙС :{" "}
+                      <a href={news.image_url} target="_blank">
+                        обзор
+                      </a>
+                    </span>
+                  </span>
+
                   <div className="col-6"></div>
                 </div>
               </div>

@@ -53,7 +53,7 @@ const Header = () => {
               </li>
               <li className="nav-item ">
                 <Link className="text-light nav-link fs-4" to="/news">
-                  Новости
+                  ПРАЙС
                 </Link>
               </li>
               <li className="nav-item ">

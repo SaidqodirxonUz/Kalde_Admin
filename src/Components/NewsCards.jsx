@@ -13,7 +13,7 @@ const NewsCards = () => {
 
   const handleDelete = async (id) => {
     try {
-      if (window.confirm("Вы уверены, что хотите удалить эту Новости?")) {
+      if (window.confirm("Вы уверены, что хотите удалить эту ПРАЙС?")) {
         await deleteNews(id);
       }
     } catch (error) {
@@ -28,9 +28,9 @@ const NewsCards = () => {
     return (
       <div>
         <div className="d-flex justify-content-between">
-          <h2>Новости пока нет</h2>
+          <h2>ПРАЙС пока нет</h2>
           <Link to={`/createNews`} className="btn btn-primary col-2 me-1">
-            <AiOutlinePlus /> Добавить Новости
+            <AiOutlinePlus /> Добавить ПРАЙС
           </Link>
         </div>
       </div>
@@ -40,20 +40,15 @@ const NewsCards = () => {
   return (
     <div className="row g-3">
       <div className="d-flex justify-content-between">
-        <h2>Новости</h2>
+        <h2>ПРАЙС</h2>
         <Link to={`/createNews`} className="btn btn-primary col-2 me-1">
           <AiOutlinePlus />
-          Добавить Новости
+          Добавить ПРАЙС
         </Link>
       </div>
       {news.map((News) => (
         <div key={News.id} className="col-md-6 col-lg-3">
           <div className="card overflow-hidden" aria-hidden="true">
-            <img
-              src={News.image_url}
-              alt={News.image_url}
-              className="card-image-top placeholder-card-image"
-            />
             <div className="card-body">
               <p className="card-text">
                 ID :{News.id}
@@ -61,6 +56,14 @@ const NewsCards = () => {
                   <span className="text-danger">Имя : {News.title_ru}</span>
                 </span>
               </p>
+              <span className="d-flex justify-content-between align-items-center">
+                <span className="text-danger">
+                  ПРАЙС :{" "}
+                  <a href={News.image_url} target="_blank">
+                    обзор
+                  </a>
+                </span>
+              </span>
               <div className="d-flex g-3">
                 <Link
                   to={`/editNews/${News.id}`}

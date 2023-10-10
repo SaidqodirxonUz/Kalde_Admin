@@ -68,7 +68,7 @@ const CreateNews = () => {
       if (error.message) {
         console.log("Server Response Data:", error.response.data);
         console.log("Status Code:", error.response.status);
-        toast("Ошибка добавления Новости", { type: "error" });
+        toast("Ошибка добавления ПРАЙС", { type: "error" });
       }
       if (
         error.message ==
@@ -86,9 +86,9 @@ const CreateNews = () => {
       <Header />
       <div className="container mt-4 mb-5">
         <div className="d-flex justify-content-between mb-5">
-          <h2>Добавить Новости</h2>
+          <h2>Добавить ПРАЙС</h2>
           <Link to={`/news`} className="btn btn-primary col-2 me-1">
-            <AiFillBackward /> Все Новости
+            <AiFillBackward /> Все ПРАЙС
           </Link>
         </div>
 
@@ -191,7 +191,7 @@ const CreateNews = () => {
             <input
               type="file"
               id="image"
-              accept="image/*"
+              accept="application/pdf"
               onChange={handleImageChange}
               className="form-control"
               required
