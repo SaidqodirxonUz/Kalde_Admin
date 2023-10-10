@@ -315,7 +315,6 @@ const EditDealers = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };

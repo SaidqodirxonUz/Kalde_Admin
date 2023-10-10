@@ -77,7 +77,6 @@ const More = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

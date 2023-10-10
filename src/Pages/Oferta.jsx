@@ -62,7 +62,6 @@ function Oferta() {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

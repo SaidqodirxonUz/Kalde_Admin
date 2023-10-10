@@ -75,7 +75,6 @@ const Newsdetails = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

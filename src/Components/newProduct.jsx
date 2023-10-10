@@ -258,7 +258,6 @@ const ProductForm = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };

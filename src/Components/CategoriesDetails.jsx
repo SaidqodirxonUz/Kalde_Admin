@@ -58,7 +58,6 @@ const CategoriesDetails = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

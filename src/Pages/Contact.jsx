@@ -157,7 +157,6 @@ function Contact() {
           </form>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

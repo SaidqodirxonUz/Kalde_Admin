@@ -321,7 +321,6 @@ const CreateDealers = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };

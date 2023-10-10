@@ -160,7 +160,6 @@ const CategoriesForm = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };

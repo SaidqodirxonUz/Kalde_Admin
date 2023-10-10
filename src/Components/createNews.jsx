@@ -209,7 +209,6 @@ const CreateNews = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };

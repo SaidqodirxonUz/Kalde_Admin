@@ -19,7 +19,6 @@ const ProductsList = () => {
     <>
       <Header />
       <Products />
-      <Footer />
     </>
   );
 };

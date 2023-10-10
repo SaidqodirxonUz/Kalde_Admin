@@ -129,7 +129,6 @@ const EditAdmin = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };

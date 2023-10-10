@@ -224,7 +224,6 @@ const EditNews = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };

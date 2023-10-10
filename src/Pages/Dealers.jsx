@@ -19,7 +19,6 @@ const Dealers = () => {
     <>
       <Header />
       <DealersList />
-      <Footer />
     </>
   );
 };

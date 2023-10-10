@@ -68,7 +68,6 @@ const DealerDetails = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

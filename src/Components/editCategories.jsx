@@ -179,7 +179,6 @@ const EditCategories = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </>
   );
 };

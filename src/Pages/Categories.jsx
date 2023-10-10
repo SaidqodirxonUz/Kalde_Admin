@@ -19,7 +19,6 @@ const CategoriesList = () => {
     <>
       <Header />
       <Categories />
-      <Footer />
     </>
   );
 };
