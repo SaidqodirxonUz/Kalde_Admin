@@ -34,12 +34,6 @@ const DealerDetails = () => {
         <div className="row g-3 mb-5">
           <div className="col-12 h-100 pt-5">
             <div className="card overflow-hidden" aria-hidden="true">
-              <img
-                src={dealer.image_url}
-                className="placeholder-card-image d-flex align-items-center justify-content-center card-image-top bg-light"
-                alt=""
-              />
-
               <div className="card-body">
                 <div className="card-text">
                   <h5 className="news-description my-3">ID : {dealer.id}</h5>
@@ -50,6 +44,7 @@ const DealerDetails = () => {
 
                 <div className="d-flex g-3 row">
                   <p className="text-secondary ">Описание: {dealer.desc_ru}</p>
+
                   <div className="col-6 d-flex justify-content-between">
                     {/* <h6 className="fs-2">{news.category}</h6> */}
                   </div>

@@ -50,11 +50,6 @@ const DealerCards = () => {
       {dealers.map((Dealers) => (
         <div key={Dealers.id} className="col-md-6 col-lg-3">
           <div className="card overflow-hidden" aria-hidden="true">
-            <img
-              src={Dealers.image_url}
-              alt={Dealers.image_url}
-              className="card-image-top placeholder-card-image"
-            />
             <div className="card-body">
               <p className="card-text">
                 ID :{Dealers.id}

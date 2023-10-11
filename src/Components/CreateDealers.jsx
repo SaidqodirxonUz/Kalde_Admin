@@ -16,16 +16,13 @@ const CreateDealers = () => {
     desc_uz: "",
     desc_ru: "",
     desc_en: "",
-    adress: "",
+
     location: "",
-    email: "",
-    orientation: "",
-    work_at: "",
+
     phone_number: "",
-    // addition_number: "",
+    addition_number: "",
   });
 
-  const [imageFile, setImageFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleInputChange = (event) => {
@@ -36,52 +33,31 @@ const CreateDealers = () => {
     }));
   };
 
-  const handleImageChange = (event) => {
-    setImageFile(event.target.files[0]);
-  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (!imageFile) {
-      toast.error("Вы должны выбрать картинку.", { type: "error" });
-      return;
-    }
-
-    const formDataWithImage = new FormData();
-    for (const key in formData) {
-      formDataWithImage.append(key, formData[key]);
-    }
-
-    formDataWithImage.append("image", imageFile);
 
     try {
       setIsUploading(true);
 
-      const response = await axios.post("/dealers", formDataWithImage, {
+      const response = await axios.post("/dealers", formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
-
+          "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
         },
       });
 
-      console.log(" added:", response.data);
+      console.log("added:", response.data);
       toast("добавлена", { type: "success" });
       navigate("/dealers");
     } catch (error) {
       console.log("Error adding category:", error.message);
-      //   toast(error.message, { type: "error" });
 
-      if (error.message) {
+      if (error.response) {
         console.log("Server Response Data:", error.response.data);
         console.log("Status Code:", error.response.status);
         toast("Ошибка добавления Категория", { type: "error" });
-      }
-      if (
-        error.message ==
-        'Произошла ошибка error: insert into "images" ("filename", "image_url") values ($1, $2) returning "id", "image_url", "filename" - duplicate key value violates unique constraint "images_filename_unique"'
-      ) {
-        toast("Изображение с таким названием уже загружено", { type: "error" });
+      } else {
+        toast("An error occurred while making the request", { type: "error" });
       }
     } finally {
       setIsUploading(false);
@@ -190,25 +166,11 @@ const CreateDealers = () => {
               required
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="adress" className="form-label">
-              Адрес
-              <span className="text-danger">Обязательно</span> :
-            </label>
-            <input
-              type="text"
-              id="adress"
-              name="adress"
-              // value={formData.desc_en}
-              onChange={handleInputChange}
-              className="form-control"
-              required
-            />
-          </div>
+
           <div className="mb-3">
             <label htmlFor="location" className="form-label">
               Расположение
-              <span className="text-danger">Обязательно</span> :
+              <span className="text-danger"> Обязательно</span> :
             </label>
             <input
               type="text"
@@ -220,56 +182,11 @@ const CreateDealers = () => {
               required
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Электронная почта
-              <span className="text-danger">Обязательно</span> :
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              // value={formData.desc_en}
-              onChange={handleInputChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="orientation" className="form-label">
-              Ориентация
-              <span className="text-danger">Обязательно</span> :
-            </label>
-            <input
-              type="text"
-              id="orientation"
-              name="orientation"
-              // value={formData.desc_en}
-              onChange={handleInputChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="work_at" className="form-label">
-              Рабочее время
-              <span className="text-danger">Обязательно</span> :
-            </label>
-            <input
-              type="text"
-              id="work_at"
-              name="work_at"
-              // value={formData.desc_en}
-              onChange={handleInputChange}
-              className="form-control"
-              placeholder="e.g: 8:00-20:00"
-              required
-            />
-          </div>
+
           <div className="mb-3">
             <label htmlFor="phone_number" className="form-label">
               Номер телефона
-              <span className="text-danger">Обязательно</span> :
+              <span className="text-danger"> Обязательно</span> :
             </label>
             <input
               type="text"
@@ -281,10 +198,10 @@ const CreateDealers = () => {
               required
             />
           </div>
-          {/* <div className="mb-3">
+          <div className="mb-3">
             <label htmlFor="addition_number" className="form-label">
-              Addition Number
-              <span className="text-danger">Необязательно</span> :
+              Дополнительный номер телефона
+              <span className="text-danger"> Oбязательно</span> :
             </label>
             <input
               type="text"
@@ -294,21 +211,8 @@ const CreateDealers = () => {
               onChange={handleInputChange}
               className="form-control"
             />
-          </div> */}
-
-          <div className="mb-3">
-            <label htmlFor="image" className="form-label">
-              Изображение<span className="text-danger"> Необязательно</span> :
-            </label>
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="form-control"
-              required
-            />
           </div>
+
           <div>
             {isUploading && <p>Загрузка, пожалуйста подождите ....</p>}
             <button

@@ -17,17 +17,13 @@ const EditDealers = () => {
     desc_uz: "",
     desc_ru: "",
     desc_en: "",
-    adress: "",
+
     location: "",
-    email: "",
-    orientation: "",
-    work_at: "",
+
     phone_number: "",
-    addition_number: "",
-    // image: null,
+    // addition_number: "",
   });
 
-  const [imageFile, setImageFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleInputChange = (event) => {
@@ -37,32 +33,30 @@ const EditDealers = () => {
       [name]: value,
     }));
   };
-  const handleImageChange = (event) => {
-    // console.log(event.target.files[0], "file");
-    setImageFile(event.target.files[0]);
-    console.log(imageFile);
-  };
 
   useEffect(() => {
     async function fetchCategoriesDetails() {
       try {
         const response = await axios.get(`/dealers/${id}`);
         console.log(response.data.data, "res");
+        console.log(response.data.data[0].title_uz, "title bu ");
         const dealerData = {
-          title_uz: response.data.data.title_uz,
-          title_ru: response.data.data.title_ru,
-          title_en: response.data.data.title_en,
-          desc_uz: response.data.data.desc_uz,
-          desc_ru: response.data.data.desc_ru,
-          desc_en: response.data.data.desc_en,
-          adress: response.data.data.adress,
-          location: response.data.data.location,
-          email: response.data.data.email,
-          orientation: response.data.data.orientation,
-          work_at: response.data.data.work_at,
-          phone_number: response.data.data.phone_number,
+          title_uz: response.data.data[0].title_uz,
+          title_ru: response.data.data[0].title_ru,
+          title_en: response.data.data[0].title_en,
+          desc_uz: response.data.data[0].desc_uz,
+          desc_ru: response.data.data[0].desc_ru,
+          desc_en: response.data.data[0].desc_en,
+
+          location: response.data.data[0].location,
+
+          phone_number: response.data.data[0].phone_number,
+          addition_number: response.data.data[0].addition_number, // xato berishi mumkin
         };
         console.log(dealerData);
+
+        console.log(dealerData.title_uz, "title uz");
+
         setFormData(dealerData);
         toast.success("Успешно");
       } catch (error) {
@@ -77,22 +71,13 @@ const EditDealers = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formDataWithImage = new FormData();
-    for (const key in formData) {
-      formDataWithImage.append(key, formData[key]);
-    }
-    console.log(imageFile, "img");
-    if (imageFile) {
-      formDataWithImage.append("image", imageFile);
-    }
 
     try {
       setIsUploading(true);
 
-      const response = await axios.patch(`/dealers/${id}`, formDataWithImage, {
+      const response = await axios.patch(`/dealers/${id}`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
-
+          "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
         },
       });
@@ -100,17 +85,11 @@ const EditDealers = () => {
       toast.success("Успешно изменено");
       navigate("/dealers");
     } catch (error) {
-      console.log("Error updating category:", error);
+      console.log("Error:", error);
 
       if (error.response) {
         console.log("Error response data:", error.response.data);
         console.log("Error response status:", error.response.status);
-      }
-      if (error.response.data.error == "Unauthorized.") {
-        toast("Пожалуйста, авторизоваться еще раз.", {
-          type: "error",
-        });
-        navigate("/login");
       }
 
       toast("Что-то пошло не так. Пожалуйста, попробуйте еще раз.", {
@@ -211,19 +190,7 @@ const EditDealers = () => {
               className="form-control"
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="adress" className="form-label">
-              Адрес
-            </label>
-            <input
-              type="text"
-              id="adress"
-              name="adress"
-              value={formData.adress}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
+
           <div className="mb-3">
             <label htmlFor="location" className="form-label">
               Расположение
@@ -237,46 +204,7 @@ const EditDealers = () => {
               className="form-control"
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Электронная почта
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="orientation" className="form-label">
-              Ориентация
-            </label>
-            <input
-              type="text"
-              id="orientation"
-              name="orientation"
-              value={formData.orientation}
-              onChange={handleInputChange}
-              className="form-control"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="work_at" className="form-label">
-              Рабочее время
-            </label>
-            <input
-              type="text"
-              id="work_at"
-              name="work_at"
-              value={formData.work_at}
-              onChange={handleInputChange}
-              className="form-control"
-              placeholder="e.g: 8:00-20:00"
-            />
-          </div>
+
           <div className="mb-3">
             <label htmlFor="phone_number" className="form-label">
               Номер телефона
@@ -285,21 +213,22 @@ const EditDealers = () => {
               type="text"
               id="phone_number"
               name="phone_number"
-              value={formData.phone}
+              value={formData.phone_number}
               onChange={handleInputChange}
               className="form-control"
             />
           </div>
+
           <div className="mb-3">
-            <label htmlFor="image" className="form-label">
-              Изображение
+            <label htmlFor="addition_number" className="form-label">
+              Дополнительный номер телефона
             </label>
             <input
-              type="file"
-              id="image"
-              name="image" // Add name attribute for file upload
-              accept="image/*"
-              onChange={handleImageChange}
+              type="text"
+              id="addition_number"
+              name="addition_number"
+              value={formData.addition_number}
+              onChange={handleInputChange}
               className="form-control"
             />
           </div>
