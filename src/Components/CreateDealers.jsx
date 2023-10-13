@@ -17,10 +17,10 @@ const CreateDealers = () => {
     desc_ru: "",
     desc_en: "",
 
-    location: "",
+    location: "NULL",
 
     phone_number: "",
-    addition_number: "",
+    addition_number: "NULL",
   });
 
   const [isUploading, setIsUploading] = useState(false);
@@ -170,16 +170,16 @@ const CreateDealers = () => {
           <div className="mb-3">
             <label htmlFor="location" className="form-label">
               Расположение
-              <span className="text-danger"> Обязательно</span> :
+              <span className="text-danger"> Не обязательно</span> :
             </label>
             <input
               type="text"
               id="location"
               name="location"
-              // value={formData.desc_en}
+              value={formData.location}
               onChange={handleInputChange}
               className="form-control"
-              required
+              // required
             />
           </div>
 
@@ -192,7 +192,7 @@ const CreateDealers = () => {
               type="text"
               id="phone_number"
               name="phone_number"
-              // value={formData.desc_en}
+              value={formData.phone_number}
               onChange={handleInputChange}
               className="form-control"
               required
@@ -201,13 +201,13 @@ const CreateDealers = () => {
           <div className="mb-3">
             <label htmlFor="addition_number" className="form-label">
               Дополнительный номер телефона
-              <span className="text-danger"> Oбязательно</span> :
+              <span className="text-danger"> Не обязательно</span> :
             </label>
             <input
               type="text"
               id="addition_number"
               name="addition_number"
-              // value={formData.desc_en}
+              value={formData.addition_number}
               onChange={handleInputChange}
               className="form-control"
             />
