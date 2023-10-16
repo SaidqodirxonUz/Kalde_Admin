@@ -58,6 +58,12 @@ const ProductCards = () => {
             <div className="card-body">
               <h5 className="card-title text-truncate">{product.title_ru}</h5>
               <p className="card-text">
+                <span className="text-primary">
+                  Имя :{" "}
+                  {
+                    product.id // Nom
+                  }
+                </span>
                 <span className="d-flex justify-content-between align-items-center">
                   <span className="text-danger">
                     Имя :{" "}

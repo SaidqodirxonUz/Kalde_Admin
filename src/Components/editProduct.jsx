@@ -85,25 +85,61 @@ const editProduct = () => {
 
     const formDataWithImage = new FormData();
 
+    formDataWithImage.append("uz_product_name", formData.uz_product_name);
+    formDataWithImage.append("ru_product_name", formData.ru_product_name);
+    formDataWithImage.append("en_product_name", formData.en_product_name);
+    formDataWithImage.append("uz_desc", formData.uz_desc);
+    formDataWithImage.append("ru_desc", formData.ru_desc);
+    formDataWithImage.append("en_desc", formData.en_desc);
+
+    formDataWithImage.append("image", imageFile);
+
+    formDataWithImage.append("category_id", selectedCategoryId);
+
     console.log("FORMDATA WITH IMAGE", formDataWithImage);
     console.log("FORMDATA", formData);
+
+    // ... oldingi kodlar ...
 
     try {
       setIsUploading(true);
 
+      const formDataWithImage = new FormData();
+      formDataWithImage.append("uz_product_name", formData.uz_product_name);
+      formDataWithImage.append("ru_product_name", formData.ru_product_name);
+      formDataWithImage.append("en_product_name", formData.en_product_name);
+      formDataWithImage.append("uz_desc", formData.uz_desc);
+      formDataWithImage.append("ru_desc", formData.ru_desc);
+      formDataWithImage.append("en_desc", formData.en_desc);
+      if (imageFile) {
+        formDataWithImage.append("image", imageFile);
+      }
+
+      formDataWithImage.append("category_id", selectedCategoryId);
+
       const response = await axios.patch(`/products/${id}`, formDataWithImage, {
         headers: {
           "Content-Type": "multipart/form-data",
-
           Authorization: localStorage.getItem("token"),
         },
       });
 
+      // Success case
+      console.log(response.data, "update data");
       toast.success("Товар успешно обновлена");
       navigate("/products");
     } catch (error) {
       console.error("Error updating product:", error);
-      toast.error("Failed to update product");
+
+      // Error case
+      if (error.response) {
+        console.error("Response Data:", error.response.data);
+        console.error("Status Code:", error.response.status);
+        toast.error(`Failed to update product: ${error.response.data.message}`);
+      } else {
+        console.error("Request Error:", error.message);
+        toast.error("Failed to update product. Check console for details.");
+      }
     } finally {
       setIsUploading(false);
     }
